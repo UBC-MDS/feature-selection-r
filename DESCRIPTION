@@ -1,0 +1,11 @@
+Package: featureselection
+Title: Feature Selection
+Version: 0.0.0.9000
+Authors@R: c(person("Victor", "Cuspinera", role = c("aut", "cre"), email = "TBA"),
+             person("Ryan", "Homer", role = c("aut", "cre"), email = "ryan.homer@alumni.ubc.ca"),
+             person("Jacky", "Ho", role = c("aut", "cre"), email = "TBA"),
+             person("Derek", "Kruszewski", role = c("aut", "cre"), email = "TBA"))
+Description: Feature Selection with ML estimators.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
