@@ -1,23 +1,18 @@
 # feature-selection-r
 An R package for feature selection with ML estimators
 
-
-### Contributors:
-|Name|GitHub|
-|----|-------------|
-|Ying Jing -Jacky- Ho |[jackyho112](https://github.com/jackyho112)|
-|Ryan Homer |[ryanhomer](https://github.com/ryanhomer)|
-|Derek Kruszewski |[dkruszew](https://github.com/dkruszew)|
-|Victor Cuspinera |[vcuspinera](https://github.com/vcuspinera)|
-
 ### Overview:
-If you have face a database with so many features that while working it gets messy, a good idea is to select some of these features for your model. However, this is not a trivial question, and to help you with this task, we have created the `featureselection` package.
+If you have encountered a database with a myriad number of features, which could be messy to work on, a good idea is to approach this problem by selecting only some of these features for your model. Feature selection will reduce complexity, reduce the time when training an algorithm, and improve the accuracy of your model (if we select them wisely). However, this is not a trivial task. 
+
+To help you out performing this task, we have created the **featureselection** package in `R`.
+
+If you are interested in a similar feature selection package for `python`, click [here](https://github.com/UBC-MDS/feature-selection-python).
 
 ### Feature description:
 In this package, four functions are included to lead with feature selection:
 
 #### Forward
-- TO DESCRIBE
+- Function that use the forward algorithm to select the number of features in a model. This iterative algorithm starts as an empty model, and add the variable with the highest improve in the accuracy of the model. The process then is iteratively repeated selecting the variables with the best improvement in the accuracy. This procedure stops when the remaining variables doesn't enhance the accuracy of the model.  
 
 #### Backward
 - TO DESCRIBE
