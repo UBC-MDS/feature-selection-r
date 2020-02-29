@@ -1,123 +1,53 @@
 
 ## Contributing
+We love your input! We want to make contributing to this project as easy and transparent as possible, whether it's:
 
-Contributions are welcome, and they are greatly appreciated! Every little bit
-helps, and credit will always be given.
+- Reporting a bug
+- Discussing the current state of the code
+- Submitting a fix
+- Proposing new features
+- Becoming a maintainer
 
-You can contribute in many ways:
+## We Develop with Github
+We use Github to host code, to track issues and feature requests, as well as accept pull requests.
 
-## Types of Contributions
+## We Use [Github Flow](https://guides.github.com/introduction/flow/index.html), So All Code Changes Happen Through Pull Requests
+Pull requests are the best way to propose changes to the codebase (we use [Github Flow](https://guides.github.com/introduction/flow/index.html)). We actively welcome your pull requests:
 
+1. Fork the repo and create your branch from `master`.
+2. If you've added code that should be tested, add tests.
+3. If you've changed APIs, update the documentation.
+4. Issue that pull request!
 
-### Report Bugs
+## Any contributions you make will be under the MIT Software License
+In short, when you submit code changes, your submissions are understood to be under the same [MIT License](http://choosealicense.com/licenses/mit/) that covers the project. Feel free to contact the maintainers if that's a concern.
 
-Report bugs at https://github.com/UBC-MDS/feature-selection/issues.
+## Report bugs using Github's [issues](https://github.com/briandk/transcriptase-atom/issues)
+We use GitHub issues to track public bugs. Report a bug by [opening a new issue](); it's that easy!
 
-If you are reporting a bug, please include:
+## Write bug reports with detail, background, and sample code
+[This is an example](http://stackoverflow.com/q/12488905/180626) of a good bug report. Here's [another example from Craig Hockenberry](http://www.openradar.me/11905408), a respected app developer.
 
-* Your operating system name and version.
-* Any details about your local setup that might be helpful in troubleshooting.
-* Detailed steps to reproduce the bug.
+**Great Bug Reports** tend to have:
 
-### Fix Bugs
+- A quick summary and/or background
+- Steps to reproduce
+  - Be specific!
+  - Give sample code if you can. [My stackoverflow question](http://stackoverflow.com/q/12488905/180626) includes sample code that *anyone* with a base R setup can run to reproduce what I was seeing
+- What you expected would happen
+- What actually happens
+- Notes (possibly including why you think this might be happening, or stuff you tried that didn't work)
 
-Look through the GitHub issues for bugs. Anything tagged with "bug" and "help
-wanted" is open to whoever wants to implement it.
+People *love* thorough bug reports. I'm not even kidding.
 
-### Implement Features
+## Use a Consistent Coding Style
+We will be referring to [Facebook's Guidelines](https://github.com/facebook/draft-js/blob/a9316a723f9e918afde44dea68b5f9f39b7d9b00/CONTRIBUTING.md)
 
-Look through the GitHub issues for features. Anything tagged with "enhancement"
-and "help wanted" is open to whoever wants to implement it.
+* 2 spaces for indentation rather than tabs
+* You can try running `npm run lint` for style unification
 
-### Write Documentation
+## License
+By contributing, you agree that your contributions will be licensed under its MIT License.
 
-feature-selection could always use more documentation, whether as part of the
-official feature-selection docs, in docstrings, or even on the web in blog posts,
-articles, and such.
-
-### Submit Feedback
-
-The best way to send feedback is to file an issue at https://github.com/UBC-MDS/feature-selection/issues.
-
-If you are proposing a feature:
-
-* Explain in detail how it would work.
-* Keep the scope as narrow as possible, to make it easier to implement.
-* Remember that this is a volunteer-driven project, and that contributions
-  are welcome :)
-
-## Get Started!
-
-Ready to contribute? Here's how to set up `feature-selection` for local development.
-
-1. Fork the `feature-selection` repo on GitHub.
-
-2. Clone your fork locally:
-
-	```
-	git clone git@github.com:your_name_here/feature-selection.git
-	```
-
-3. Install your local copy with Poetry, this is how you set up your fork for local development:
-
-	```
-	cd feature-selection/
-	poetry install
-	```
-
-4. Create a branch for local development:
-
-	```
-	git checkout -b name-of-your-bugfix-or-feature
-	```
-
-   	Now you can make your changes locally.
-
-5. When you're done making changes, check that your changes pass the tests by running pytest
-
-	```
-	poetry run pytest
-	```
-
-6. Commit your changes and push your branch to GitHub:
-
-	```
-	git add .
-	git commit -m "Your detailed description of your changes."
-	git push origin name-of-your-bugfix-or-feature
-	```
-
-7. Submit a pull request through the GitHub website.
-
-## Pull Request Guidelines
-
-Before you submit a pull request, check that it meets these guidelines:
-
-1. The pull request should include tests.
-2. If the pull request adds functionality, the docs should be updated. Put
-   your new functionality into a function with a docstring, and add the
-   feature to the list in README.md.
-3. The pull request should work for Python 3.7 & 3.8. Check https://github.com/UBC-MDS/feature-selection/pulls and make sure that the tests pass for all supported Python versions.
-
-## Tips
-
-To run a subset of tests:
-
-```
-py.test tests.test_feature-selection
-```
-
-## Deploying
-
-A reminder for the maintainers on how to deploy:
-
-- Ensure the following secrets are recorded on GitHub:
-	- CODECOV_TOKEN	
-	- PYPI_USERNAME
- 	- PYPI_PASSWORD	
-
- GitHub Actions should build and deploy to testPyPI when a pull request is merged into master.
-
-## Code of Conduct
-
-Please note that the feature-selection project is released with [this Contributor Code of Conduct](CONDUCT.md). By contributing to this project you agree to abide by its terms.
+## References
+This document was adapted from the open-source contribution guidelines for [Facebook's Draft](https://github.com/facebook/draft-js/blob/a9316a723f9e918afde44dea68b5f9f39b7d9b00/CONTRIBUTING.md)
