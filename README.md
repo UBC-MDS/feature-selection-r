@@ -2,7 +2,7 @@
 An R package for feature selection with ML estimators
 
 ### Overview:
-If you have encountered a database with so many features, that while working on it and gets messy, a good idea is to approach this problem by selecting only some of these features for your model. Feature selection will reduce complexity, reduce the time when training an algorithm, and improve the accuracy of your model (if we select them wisely). However, this is not a trivial question. 
+If you have encountered a database with a myriad number of features, which could be messy to work on, a good idea is to approach this problem by selecting only some of these features for your model. Feature selection will reduce complexity, reduce the time when training an algorithm, and improve the accuracy of your model (if we select them wisely). However, this is not a trivial task. 
 
 To help you out performing this task, we have created the **featureselection** package in `R`.
 
