@@ -12,7 +12,9 @@ If you are interested in a similar feature selection package for `python`, click
 In this package, four functions are included to lead with feature selection:
 
 #### Forward
-- Iterative algorithm that starts as an empty model, add features that improves the accuracy of the model, and stops when the accuracy doesn't improve anymore.  
+- Function that use the forward algorithm to select the number of features in a model. This iterative algorithm starts as an empty model, and add the variable with the highest improve in the accuracy of the model. The process then is iteratively repeated selecting the variables with the best improvement in the accuracy. This procedure stops when the remaining variables doesn't enhance the accuracy of the model. 
+
+and no better model can be obtained.
 
 #### Backward
 - TO DESCRIBE
