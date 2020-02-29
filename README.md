@@ -22,10 +22,10 @@ In this package, four functions are included to lead with feature selection:
 #### Backward
 - TO DESCRIBE
 
-#### Function 3  
+#### Variance Thresholding  
 - TO DESCRIBE
 
-#### Function 4  
+#### Simulated Annealing  
 - TO DESCRIBE
 
 ### Installation:
