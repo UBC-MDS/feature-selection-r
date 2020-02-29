@@ -11,7 +11,7 @@ An R package for feature selection with ML estimators
 |Victor Cuspinera |[vcuspinera](https://github.com/vcuspinera)|
 
 ### Overview:
-If you have face a database with so many features that while working it gets messy, a good idea is to select some of these features for your model. However, this is not a trivial question, and to help you with this task, we have created the feature-selection-python package.
+If you have face a database with so many features that while working it gets messy, a good idea is to select some of these features for your model. However, this is not a trivial question, and to help you with this task, we have created the `featureselection` package.
 
 ### Feature description:
 In this package, four functions are included to lead with feature selection:
