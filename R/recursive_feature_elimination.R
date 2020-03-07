@@ -1,22 +1,29 @@
 #' Select features by Recursive Feature Elimination
 #'
 #' @description
-#' Iteratively fit and score an estimator and eliminate features
-#' based on the score.
+#' Feature selector that implements recursive feature elimination
 #'
-#' The lower the score, the more favourable for the feature.
-#' If your score is better the larger it is, then you should return the
-#' negative of that score, for example negative MSE.
+#' Implements a greedy algorithm that iteratively calls the user-supplied
+#' scorer function and eliminates features based on its return value.
 #'
-#' @param scorer A user-defined function that fits an estimnator and returns a score.
+#' @param scorer A custom user-supplied function that accepts a data.frame
+#' as input and returns the column name of the column with the lowest weight.
 #' @param data A data.frame or tibble
 #' @param n_features_to_select The target number of features.
 #'
-#' @return A vector of feature indices representing selected features in ranked order.
+#' @return Vector of column names of non-eliminated features.
 #' @export
 #'
 #' @examples
-#' # TBA
+#' > custom_scorer_fn <- function(data) {
+#' >   model <- lm(Y ~ ., data)
+#' >   names(which.min(model$coefficients[-1]))[[1]]
+#' > }
+#' > df <- tgp::friedman.1.data()
+#' > data <- dplyr::select(df, -Ytrue)
+#' > features <- featureselection::recursive_feature_elimination(custom_scorer_fn, data, 4)
+#' [1] "X1" "X2" "X4" "X5" "Y"
+
 recursive_feature_elimination <- function(scorer, data, n_features_to_select) {
   eliminated_features <- c()
   total_features <- ncol(data) - 1
