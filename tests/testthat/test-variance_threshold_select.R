@@ -37,7 +37,7 @@ testthat::test_that("inputs checking", {
     "Threshold must be a positive number."
   )
   testthat::expect_error(
-    recursive_feature_elimination(123, threshold=-1),
+    recursive_feature_elimination(123),
     "Expected a `data.frame` object for `data`."
   )
 })
