@@ -17,9 +17,20 @@ In this package, four functions are included to lead with feature selection:
 
 * `recursive_feature_elimination` - Iteratively fit and score an estimator for greedy feature elimination.
 
-* `variance_threshold_select` - TO DESCRIBE
+* `variance_threshold_select` - Perform simmulated annealing to select features: randomly choose a set of features and determine model performance. Then slightly modify the chosen features randomly and test to see if the modified feature list has improved model performance. If there is improvement, the newer model is kept, if not, a test is performed to determine if the worse model is still kept based on a acceptance probability that decreases as iterations continue and how worse the newer model performs. The process is repeated for a set number of iterations.
 
-* `<simulated annealing>` - TO DESCRIBE
+* `simulated_annealing_select` - Perform simmulated annealing to select features: randomly choose a set of features and determine model performance. Then slightly modify the chosen features randomly and test to see if the modified feature list has improved model performance. If there is improvement, the newer model is kept, if not, a test is performed to determine if the worse model is still kept based on a acceptance probability that decreases as iterations continue and how worse the newer model performs. The process is repeated for a set number of iterations.
+
+### Existing Ecosystems:
+Some of the above features already exsist within the R ecosystem:
+
+- [Forward Selection](https://www.rdocumentation.org/packages/MXM/versions/0.9.4/topics/Forward%20selection)
+
+- [Recursive Feature Elimination](https://www.rdocumentation.org/packages/caret/versions/6.0-85/topics/rfe)
+
+- [Variance Threshold] = None
+
+- [Simulated Annealing] = None
 
 ## Installation:
 
