@@ -1,6 +1,7 @@
 #
 # Tests for variance_threshold_select()
 #
+library(tibble)
 
 testthat::test_that("relevant features remain", {
   data <- tibble(
@@ -33,11 +34,11 @@ testthat::test_that("inputs checking", {
   )
 
   testthat::expect_error(
-    recursive_feature_elimination(data, threshold=-1),
+    variance_threshold_select(data, threshold=-1),
     "Threshold must be a positive number."
   )
   testthat::expect_error(
-    recursive_feature_elimination(123),
+    variance_threshold_select(123),
     "Expected a `data.frame` object for `data`."
   )
 })
