@@ -22,8 +22,8 @@ testthat::test_that("relevant features remain", {
   data <- dplyr::select(tgp::friedman.1.data(), -Ytrue)
 
   # test
-  features <- recursive_feature_elimination(scorer, data, n_features_to_select = 5)
-  testthat::expect_identical(features, c("X1", "X2", "X4", "X5", "X8", "Y"))
+  features <- recursive_feature_elimination(scorer, data, n_features_to_select = 4)
+  testthat::expect_identical(features, c("X1", "X2", "X4", "X5", "Y"))
 })
 
 # Test early stop logic and conversion from list of eliminated features
