@@ -16,8 +16,20 @@
 #' @return array of selected features
 #' @export
 #' 
-simulated_annealing <- function(model, X, y, c = 1, iterations = 100, bools = FALSE) {
+#' @examples
+#' 
+simulated_annealing <- function(scorer, X, y, c = 1, iterations = 100, bools = FALSE) {
     
+    # Is `scorer` a function?
+    if (class(scorer) != "function") {
+    stop("Expected a function for `scorer`." )
+    }
+
+    # Do we have a data.frame or something compatible like tibble?
+    if (!any(class(X) == "data.frame")) {
+        stop("Expected a `data.frame` object for `data`.")
+    }
+
     # Set mutate percentage
     mutate <- 0.05
     
