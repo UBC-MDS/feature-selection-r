@@ -20,8 +20,8 @@ testthat::test_that("relevant features remain", {
   # Create dataframe and remove Ytrue column; keep Y.
   set.seed(0)
   data <- dplyr::select(tgp::friedman.1.data(), -Ytrue)
-  X <- data[1:(length(data)-2)]
-  y <- data[length(data)-1]
+  X <- data[1:(length(data)-1)]
+  y <- data[length(data)]
 
   # Run Test
   results <- replicate(simulated_annealing(scorer, X, y, bools = TRUE), n = 50)
@@ -36,12 +36,12 @@ testthat::test_that("relevant features remain", {
 testthat::test_that("features returned is not empty", {
   # Create dataframe and remove Ytrue column; keep Y.  
   data <- dplyr::select(tgp::friedman.1.data(), -Ytrue)
-  X <- data[1:(length(data)-2)]
-  y <- data[length(data)-1]
+  X <- data[1:(length(data)-1)]
+  y <- data[length(data)]
 
   # Run Test
   testthat::expect_gt(length(simulated_annealing(scorer, X, y)), 0)
-  testthat::expect_gt(sum(simulated_annealing(scorer, X, y, bools = TRUE), 0)
+  testthat::expect_gt(sum(simulated_annealing(scorer, X, y, bools = TRUE)), 0)
 })
 
 testthat::test_that("`scorer param is a function", {
@@ -57,9 +57,9 @@ testthat::test_that("X param is a data.frame (or tibble)", {
 
 testthat::test_that("tibbles work too!", {
   data <- dplyr::select(tgp::friedman.1.data(), -Ytrue)
-  X <- data[1:(length(data)-2)]
-  y <- data[length(data)-1]
+  X <- data[1:(length(data)-1)]
+  y <- data[length(data)]
   X <- dplyr::as_tibble(X)
 
-  testthat::expect_gt(length(length(simulated_annealing(scorer, X, y)), 0))
+  testthat::expect_gt(length(simulated_annealing(scorer, X, y)), 0)
 })
