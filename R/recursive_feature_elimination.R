@@ -25,10 +25,36 @@
 #' [1] "X1" "X2" "X4" "X5" "Y"
 
 recursive_feature_elimination <- function(scorer, data, n_features_to_select) {
+  # Is `scorer` a function?
+  if (class(scorer) != "function") {
+    stop("Expected a function for `scorer`." )
+  }
+
+  # Do we have a data.frame or something compatible like tibble?
+  if (!any(class(data) == "data.frame")) {
+    stop("Expected a `data.frame` object for `data`.")
+  }
+
   eliminated_features <- c()
   total_features <- ncol(data) - 1
 
-  for (i in 1:(ncol(data) - 2)) {
+  # n_features_to_select must be a number
+  if (!any(typeof(n_features_to_select) == c("integer", "double"))) {
+    stop("Expected a number for `n_features_to_select`.")
+  }
+
+  # Warn if n_features_to_select is not a whole number
+  if (n_features_to_select%%1 != 0) {
+    warning("`n_features` is not a whole number. It was truncated.")
+    n_features_to_select <- floor(n_features_to_select)
+  }
+
+  # n_features_to_select must be >= 1 and < total features
+  if (n_features_to_select < 1 || n_features_to_select >= total_features) {
+    stop(paste("Expected a value between 1 and", total_features - 1, "for `n_features_to_select`."))
+  }
+
+  for (i in 1:total_features) {
     # Remove currently eliminated features
     features_to_try <- dplyr::select(data, -eliminated_features)
 
@@ -43,5 +69,6 @@ recursive_feature_elimination <- function(scorer, data, n_features_to_select) {
 
   # Return a vector of the features to keep
   purrr::reduce(names(data),
-                function(acc, col) { if (any(eliminated_features == col)) acc else c(acc, col) })
+                function(acc, col) { if (any(eliminated_features == col)) acc else c(acc, col) },
+                .init = c())
 }
