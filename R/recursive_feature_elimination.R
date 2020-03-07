@@ -1,20 +1,74 @@
 #' Select features by Recursive Feature Elimination
 #'
 #' @description
-#' Iteratively fit and score an estimator and eliminate features
-#' based on the score.
+#' Feature selector that implements recursive feature elimination
 #'
-#' The lower the score, the more favourable for the feature.
-#' If your score is better the larger it is, then you should return the
-#' negative of that score, for example negative MSE.
+#' Implements a greedy algorithm that iteratively calls the user-supplied
+#' scorer function and eliminates features based on its return value.
 #'
-#' @param score_fn A user-defined function that fits an estimnator and returns a score.
-#' @param num_features The target number of features.
+#' @param scorer A custom user-supplied function that accepts a data.frame
+#' as input and returns the column name of the column with the lowest weight.
+#' @param data A data.frame or tibble
+#' @param n_features_to_select The target number of features.
 #'
-#' @return A vector of feature indices representing selected features in ranked order.
+#' @return Vector of column names of non-eliminated features.
 #' @export
 #'
 #' @examples
-recursive_feature_elimination <- function(score_fn, num_features) {
+#' custom_scorer_fn <- function(data) {
+#'   model <- lm(Y ~ ., data)
+#'   names(which.min(model$coefficients[-1]))[[1]]
+#' }
+#' df <- tgp::friedman.1.data()
+#' data <- dplyr::select(df, -Ytrue)
+#' features <- featureselection::recursive_feature_elimination(custom_scorer_fn, data, 4)
+#' # [1] "X1" "X2" "X4" "X5" "Y"
 
+recursive_feature_elimination <- function(scorer, data, n_features_to_select) {
+  # Is `scorer` a function?
+  if (class(scorer) != "function") {
+    stop("Expected a function for `scorer`." )
+  }
+
+  # Do we have a data.frame or something compatible like tibble?
+  if (!any(class(data) == "data.frame")) {
+    stop("Expected a `data.frame` object for `data`.")
+  }
+
+  eliminated_features <- c()
+  total_features <- ncol(data) - 1
+
+  # n_features_to_select must be a number
+  if (!any(typeof(n_features_to_select) == c("integer", "double"))) {
+    stop("Expected a number for `n_features_to_select`.")
+  }
+
+  # Warn if n_features_to_select is not a whole number
+  if (n_features_to_select%%1 != 0) {
+    warning("`n_features` is not a whole number. It was truncated.")
+    n_features_to_select <- floor(n_features_to_select)
+  }
+
+  # n_features_to_select must be >= 1 and < total features
+  if (n_features_to_select < 1 || n_features_to_select >= total_features) {
+    stop(paste("Expected a value between 1 and", total_features - 1, "for `n_features_to_select`."))
+  }
+
+  for (i in 1:total_features) {
+    # Remove currently eliminated features
+    features_to_try <- dplyr::select(data, -eliminated_features)
+
+    # Get the next feature to remove
+    feature_to_remove <- scorer(features_to_try)
+    eliminated_features <- c(eliminated_features, feature_to_remove)
+
+    # If we have our target number of features, stop.
+    if (length(eliminated_features) + n_features_to_select >= total_features)
+      break
+  }
+
+  # Return a vector of the features to keep
+  purrr::reduce(names(data),
+                function(acc, col) { if (any(eliminated_features == col)) acc else c(acc, col) },
+                .init = c())
 }
