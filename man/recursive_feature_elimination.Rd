@@ -24,12 +24,12 @@ Implements a greedy algorithm that iteratively calls the user-supplied
 scorer function and eliminates features based on its return value.
 }
 \examples{
-> custom_scorer_fn <- function(data) {
->   model <- lm(Y ~ ., data)
->   names(which.min(model$coefficients[-1]))[[1]]
-> }
-> df <- tgp::friedman.1.data()
-> data <- dplyr::select(df, -Ytrue)
-> features <- featureselection::recursive_feature_elimination(custom_scorer_fn, data, 4)
-[1] "X1" "X2" "X4" "X5" "Y"
+custom_scorer_fn <- function(data) {
+  model <- lm(Y ~ ., data)
+  names(which.min(model$coefficients[-1]))[[1]]
+}
+df <- tgp::friedman.1.data()
+data <- dplyr::select(df, -Ytrue)
+features <- featureselection::recursive_feature_elimination(custom_scorer_fn, data, 4)
+# [1] "X1" "X2" "X4" "X5" "Y"
 }

@@ -15,14 +15,14 @@
 #' @export
 #'
 #' @examples
-#' > custom_scorer_fn <- function(data) {
-#' >   model <- lm(Y ~ ., data)
-#' >   names(which.min(model$coefficients[-1]))[[1]]
-#' > }
-#' > df <- tgp::friedman.1.data()
-#' > data <- dplyr::select(df, -Ytrue)
-#' > features <- featureselection::recursive_feature_elimination(custom_scorer_fn, data, 4)
-#' [1] "X1" "X2" "X4" "X5" "Y"
+#' custom_scorer_fn <- function(data) {
+#'   model <- lm(Y ~ ., data)
+#'   names(which.min(model$coefficients[-1]))[[1]]
+#' }
+#' df <- tgp::friedman.1.data()
+#' data <- dplyr::select(df, -Ytrue)
+#' features <- featureselection::recursive_feature_elimination(custom_scorer_fn, data, 4)
+#' # [1] "X1" "X2" "X4" "X5" "Y"
 
 recursive_feature_elimination <- function(scorer, data, n_features_to_select) {
   # Is `scorer` a function?
