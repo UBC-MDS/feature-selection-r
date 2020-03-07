@@ -17,7 +17,7 @@ variance_threshold_select <- function(data, threshold = 0) {
     stop("Expected a `data.frame` object for `data`.")
   }
 
-  if (threshold < 0) {
+  if (threshold < 0 | !is.numeric(threshold)) {
     stop("Threshold must be a positive number.")
   }
 

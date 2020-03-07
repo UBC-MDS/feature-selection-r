@@ -15,7 +15,7 @@ testthat::test_that("relevant features remain", {
   testthat::expect_identical(feature_indexes, c(1, 4))
 })
 
-testthat::test_that("higher threshold", {
+testthat::test_that("appropriate features are dropped with higher threshold", {
   data <- tibble(
     a = c(1,2,3),
     b = c(2,2,2),
@@ -35,6 +35,10 @@ testthat::test_that("inputs checking", {
 
   testthat::expect_error(
     variance_threshold_select(data, threshold=-1),
+    "Threshold must be a positive number."
+  )
+  testthat::expect_error(
+    variance_threshold_select(data, threshold='123'),
     "Threshold must be a positive number."
   )
   testthat::expect_error(
