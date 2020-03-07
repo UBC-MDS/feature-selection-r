@@ -4,28 +4,32 @@
 \alias{recursive_feature_elimination}
 \title{Select features by Recursive Feature Elimination}
 \usage{
-recursive_feature_elimination(scorer, X, y, n_features_to_select = None)
+recursive_feature_elimination(scorer, data, n_features_to_select)
 }
 \arguments{
-\item{scorer}{A user-defined function that fits an estimnator and returns a score.}
+\item{scorer}{A custom user-supplied function that accepts a data.frame
+as input and returns the column name of the column with the lowest weight.}
 
-\item{X}{features}
-
-\item{y}{response}
+\item{data}{A data.frame or tibble}
 
 \item{n_features_to_select}{The target number of features.}
 }
 \value{
-A vector of feature indices representing selected features in ranked order.
+Vector of column names of non-eliminated features.
 }
 \description{
-Iteratively fit and score an estimator and eliminate features
-based on the score.
+Feature selector that implements recursive feature elimination
 
-The lower the score, the more favourable for the feature.
-If your score is better the larger it is, then you should return the
-negative of that score, for example negative MSE.
+Implements a greedy algorithm that iteratively calls the user-supplied
+scorer function and eliminates features based on its return value.
 }
 \examples{
-# TBA
+> custom_scorer_fn <- function(data) {
+>   model <- lm(Y ~ ., data)
+>   names(which.min(model$coefficients[-1]))[[1]]
+> }
+> df <- tgp::friedman.1.data()
+> data <- dplyr::select(df, -Ytrue)
+> features <- featureselection::recursive_feature_elimination(custom_scorer_fn, data, 4)
+[1] "X1" "X2" "X4" "X5" "Y"
 }
