@@ -10,7 +10,7 @@
 #' @export
 #' @examples
 #' variance_threshold_select(
-#'   tibble(x1=c(1,2,3,4,5), x2=c(0,0,0,0,0), x3=c(1,1,1,1,1))
+#'   data.frame(x1=c(1,2,3,4,5), x2=c(0,0,0,0,0), x3=c(1,1,1,1,1))
 #' )
 variance_threshold_select <- function(data, threshold = 0) {
   if (!any(class(data) == "data.frame")) {
