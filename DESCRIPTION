@@ -13,4 +13,6 @@ RoxygenNote: 7.0.2
 Suggests: 
     testthat (>= 2.1.0)
 Imports: 
-    tgp (>= 2.4.14)
+    tgp (>= 2.4.14),
+    dplyr,
+    purrr
