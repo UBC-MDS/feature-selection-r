@@ -29,7 +29,7 @@ forward_select <- function(scorer, X, y, min_features=1, max_features=10) {
 
   # X and y must be a data.frame or something compatible
   if (!any(class(X) == "data.frame")) {
-    stop("Expected a `data.frame` object for `data`.")
+    stop("Expected a 'data.frame' object for `data`.")
   }
 
   if (sum(!(dim(X))==1) != 2){
@@ -37,7 +37,7 @@ forward_select <- function(scorer, X, y, min_features=1, max_features=10) {
   }
 
   if (!any(class(y) == "data.frame")) {
-    stop("Expected a `data.frame` object for `data`.")
+    stop("Expected a 'data.frame' object for `data`.")
   }
 
   if (sum(!(dim(y))==1) != 1){

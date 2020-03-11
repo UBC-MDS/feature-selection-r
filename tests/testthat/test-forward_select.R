@@ -9,8 +9,8 @@
 #'
 #' @return The mean squared error (MSE) of the model
 scorer <- function(data) {
-  model <- lm(Y ~ ., data)
-  return(mean(model$residuals^2))
+   model <- lm(Y ~ ., data)
+   return(mean(model$residuals^2))
 }
 
 # This test creates a dataset that has 5 features that are are used to compute `Y`.
