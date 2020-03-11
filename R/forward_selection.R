@@ -119,26 +119,3 @@ forward_select <- function(scorer, X, y, min_features=1, max_features=10) {
 
   return(ftr_selection)
 }
-
-############### ERASE FROM HERE GO ON:
-
-# dataset
-data <- dplyr::select(tgp::friedman.1.data(), -Ytrue)
-train <- data[1:(length(data)-1)]
-test <- data[length(data)]
-zz <- data_frame(c(1,2,3))
-
-# scorer
-my_scorer <- function(data) {
-  model <- lm(Y ~ ., data)
-  return(mean(model$residuals^2))
-}
-
-print(dim(train)[1] != dim(train)[1])
-
-# testing
-results <- forward_select(my_scorer, train, test, 4, 4)
-
-print(sort(results))
-# print(c(1, 2, 4, 5))
-testthat::expect_setequal(results, c(1, 2, 4, 5))
