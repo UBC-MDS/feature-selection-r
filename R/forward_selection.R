@@ -21,15 +21,42 @@
 #' )
 
 forward_select <- function(scorer, X, y, min_features=1, max_features=10) {
-  #Tests
-  # Is `scorer` a function?
+  # Tests
+  # 'scorer' must be a function
   if (class(scorer) != "function") {
     stop("Expected a function for `scorer`." )
   }
 
-  # Do we have a data.frame or something compatible like tibble?
+  # X and y must be a data.frame or something compatible
   if (!any(class(X) == "data.frame")) {
     stop("Expected a `data.frame` object for `data`.")
+  }
+
+  if (sum(!(dim(X))==1) != 2){
+    stop("X must be a 2-d array")
+  }
+
+  if (!any(class(y) == "data.frame")) {
+    stop("Expected a `data.frame` object for `data`.")
+  }
+
+  if (sum(!(dim(y))==1) != 1){
+    stop("y must be a 1-d array")
+  }
+
+  # Looks for X and y have the same number of samples
+  if (dim(X)[1] != dim(y)[1]){
+    stop("X and y have inconsistent numbers of samples. X:", dim(X)[1], ", y:", dim(y)[1])
+  }
+
+  # max_features should be greather or equal to min_features
+  if (min_features > max_features){
+    stop("max_features should be greater or equal to min_features.")
+  }
+
+  # min_features should be positive, we want to select at least one feature
+  if (min_features < 1){
+    stop("min_features should be a positive number.")
   }
 
   # Initialize parameters
@@ -92,3 +119,26 @@ forward_select <- function(scorer, X, y, min_features=1, max_features=10) {
 
   return(ftr_selection)
 }
+
+############### ERASE FROM HERE GO ON:
+
+# dataset
+data <- dplyr::select(tgp::friedman.1.data(), -Ytrue)
+train <- data[1:(length(data)-1)]
+test <- data[length(data)]
+zz <- data_frame(c(1,2,3))
+
+# scorer
+my_scorer <- function(data) {
+  model <- lm(Y ~ ., data)
+  return(mean(model$residuals^2))
+}
+
+print(dim(train)[1] != dim(train)[1])
+
+# testing
+results <- forward_select(my_scorer, train, test, 4, 4)
+
+print(sort(results))
+# print(c(1, 2, 4, 5))
+testthat::expect_setequal(results, c(1, 2, 4, 5))
