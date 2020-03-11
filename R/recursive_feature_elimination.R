@@ -56,7 +56,11 @@ recursive_feature_elimination <- function(scorer, data, n_features_to_select) {
 
   for (i in 1:total_features) {
     # Remove currently eliminated features
-    features_to_try <- dplyr::select(data, -eliminated_features)
+    if (length(eliminated_features) == 0) {
+      features_to_try <- data
+    } else {
+      features_to_try <- dplyr::select(data, -eliminated_features)
+    }
 
     # Get the next feature to remove
     feature_to_remove <- scorer(features_to_try)
