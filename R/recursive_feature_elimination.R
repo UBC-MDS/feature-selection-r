@@ -23,7 +23,9 @@
 #' }
 #' df <- tgp::friedman.1.data()
 #' data <- dplyr::select(df, -Ytrue)
-#' features <- featureselection::recursive_feature_elimination(custom_scorer_fn, data, 4)
+#' X <- dplyr::select(data, -Y)
+#' y <- dplyr::select(data, Y)
+#' features <- featureselection::recursive_feature_elimination(custom_scorer_fn, X, y, 4)
 #' # [1] "X1" "X2" "X4" "X5" "Y"
 recursive_feature_elimination <- function(scorer, X, y, n_features_to_select) {
   # Is `scorer` a function?
