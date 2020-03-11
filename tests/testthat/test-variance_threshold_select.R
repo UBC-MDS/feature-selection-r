@@ -1,10 +1,9 @@
 #
 # Tests for variance_threshold_select()
 #
-library(tibble)
 
 testthat::test_that("relevant features remain", {
-  data <- tibble(
+  data <- dplyr::tibble(
     a = c(1,2,3),
     b = c(2,2,2),
     c = c('123', '123', '123'),
@@ -16,7 +15,7 @@ testthat::test_that("relevant features remain", {
 })
 
 testthat::test_that("appropriate features are dropped with higher threshold", {
-  data <- tibble(
+  data <- dplyr::tibble(
     a = c(1,2,3),
     b = c(2,2,2),
     c = c('123', '123', '123'),
@@ -28,7 +27,7 @@ testthat::test_that("appropriate features are dropped with higher threshold", {
 })
 
 testthat::test_that("inputs checking", {
-  data <- tibble(
+  data <- dplyr::tibble(
     a = c(1,2,3),
     d = c('123', '124', '1')
   )

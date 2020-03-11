@@ -2,4 +2,5 @@
 
 export(forward_select)
 export(recursive_feature_elimination)
+export(simulated_annealing)
 export(variance_threshold_select)
