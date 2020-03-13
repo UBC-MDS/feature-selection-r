@@ -23,10 +23,10 @@
 #' data <- dplyr::select(tgp::friedman.1.data(), -Ytrue)
 #' train_data <- data[1:(length(data)-1)]
 #' test_data <- data[length(data)]
-#' features <- featureselection::forward_select(my_scorer, train_data, test_data, 3, 7)
+#' features <- featureselection::forward_selection(my_scorer, train_data, test_data, 3, 7)
 #' # [1] 4 2 1 5
 
-forward_select <- function(scorer, X, y, min_features=1, max_features=10) {
+forward_selection <- function(scorer, X, y, min_features=1, max_features=10) {
   # Tests
   # 'scorer' must be a function
   if (class(scorer) != "function") {
