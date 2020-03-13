@@ -14,6 +14,7 @@
 #' @param bools If true function returns array of boolean values instead of column indicies
 #' 
 #' @return array of selected features
+#' @import stats
 #' @export
 #' 
 #' @examples
