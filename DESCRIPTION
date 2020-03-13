@@ -5,7 +5,7 @@ Authors@R: c(person("Victor", "Cuspinera", role = c("aut"), email = "TBA"),
              person("Ryan", "Homer", role = c("aut", "cre"), email = "ryan.homer@alumni.ubc.ca"),
              person("Jacky", "Ho", role = c("aut"), email = "TBA"),
              person("Derek", "Kruszewski", role = c("aut"), email = "TBA"))
-Description: Feature Selection with ML estimators.
+Description: Feature Selection with machine learning models.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -15,4 +15,5 @@ Suggests:
     tgp (>= 2.4.14),
 Imports: 
     dplyr,
-    purrr
+    purrr,
+    stats

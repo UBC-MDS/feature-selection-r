@@ -30,5 +30,13 @@ algorithm tests to see if the worse model is still kept based on a acceptance
 probability that decreases as iterations continue and if the model performs worse.
 }
 \examples{
-
+custom_scorer_fn <- function(data) {
+ model <- lm(Y ~ ., data)
+ return(mean(model$residuals^2))
+}
+df <- tgp::friedman.1.data()
+data <- dplyr::select(df, -Ytrue)
+X <- data[1:(length(data)-1)]
+y <- data[length(data)]
+features <- featureselection::simulated_annealing(custom_scorer_fn, X, y)
 }

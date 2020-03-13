@@ -47,7 +47,7 @@ simulated_annealing <- function(scorer, X, y, c = 1, iterations = 100, bools = F
     ftr_all <- c(1:length(X))
     ftr_old <- c()
     while (length(ftr_old) == 0){
-        ftr_old <- (rbinom(length(X), 1, 0.5) != 0)
+        ftr_old <- (stats::rbinom(length(X), 1, 0.5) != 0)
     }
     score_old <- scorer(cbind(X[ftr_old], y))
     
@@ -67,7 +67,7 @@ simulated_annealing <- function(scorer, X, y, c = 1, iterations = 100, bools = F
             } else {
                 # Determine probability of acceptance
                 p_accept <- exp((-i/c)*((score_new - score_old)/score_old))
-                if (runif(1) > p_accept){
+                if (stats::runif(1) > p_accept){
                 } else {
                     ftr_old <- ftr_new
                     score_old <- score_new
