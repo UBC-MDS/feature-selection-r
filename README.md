@@ -42,7 +42,10 @@ devtools::install_github("UBC-MDS/feature-selection-r")
 
 ## Dependencies
 
-- [R 3.6.1](https://www.r-project.org/)
+- [R 3.6](https://www.r-project.org/)
+- [dyplr 0.8.5](https://dplyr.tidyverse.org/)
+- [purrr 0.3.3](https://purrr.tidyverse.org/)
+- [stats 4.0.0](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html)
 
 ## Usage
 
