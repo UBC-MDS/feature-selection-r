@@ -63,7 +63,7 @@ forward_select <- function(scorer, X, y, min_features=1, max_features=10) {
 
   # min_features should be positive, we want to select at least one feature
   if (min_features < 1){
-    stop("min_features should be a positive number.")
+    stop("min_features should be more than zero.")
   }
 
   # Initialize parameters
