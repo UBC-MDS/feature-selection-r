@@ -17,7 +17,17 @@
 #' @export
 #' 
 #' @examples
+#' custom_scorer_fn <- function(data) {
+#'  model <- lm(Y ~ ., data)
+#'  return(mean(model$residuals^2))
+#' }
+#' df <- tgp::friedman.1.data()
+#' data <- dplyr::select(df, -Ytrue)
+#' X <- data[1:(length(data)-1)]
+#' y <- data[length(data)]
+#' features <- featureselection::simulated_annealing(custom_scorer_fn, X, y)
 #' 
+
 simulated_annealing <- function(scorer, X, y, c = 1, iterations = 100, bools = FALSE) {
     
     # Is `scorer` a function?
