@@ -27,6 +27,13 @@ testthat::test_that("relevant features remain", {
   set.seed(1230)
   results <- forward_select(scorer, X, y, 4, 4)
   testthat::expect_setequal(results, c(1, 2, 4, 5))
+})
+
+testthat::test_that("X and y tests", {
+  set.seed(0)
+  data <- dplyr::select(tgp::friedman.1.data(), -Ytrue)
+  X <- data[1:(length(data)-1)]
+  y <- data[length(data)]
 
   # X and y are Dataframes
   testthat::test_that("X param is a data.frame (or tibble)", {
@@ -42,18 +49,23 @@ testthat::test_that("relevant features remain", {
     testthat::expect_error(forward_select(scorer, X, list()), "data.frame")
   })
 
-  # 'scorer' is a function
-  testthat::test_that("`scorer param is a function", {
-    testthat::expect_error(forward_select(0, X, y, 4, 4), "scorer")
-  })
+  # check that min number of features is greater or equal to one
+  testthat::expect_error(forward_select(scorer, X, y, 0, 6))
+})
 
-  # check that the number of features are between min and max number of features
+# check that the number of features are between min and max number of features
+testthat::test_that("min_features and max_features works properly", {
+  data <- dplyr::select(tgp::friedman.1.data(), -Ytrue)
+  X <- data[1:(length(data)-1)]
+  y <- data[length(data)]
   testthat::expect_gte(length(forward_select(scorer, X, y, 5, 6)), 4)
   testthat::expect_lte(length(forward_select(scorer, X, y, 5, 6)), 6)
   testthat::expect_error(forward_select(scorer, X, y, 6, 5))
+})
 
-  # check that min number of features is greater or equal to one
-  testthat::expect_error(forward_select(scorer, X, y, 0, 6))
+# 'scorer' is a function
+testthat::test_that("`scorer param is a function", {
+  testthat::expect_error(forward_select(0, X, y, 4, 4), "scorer")
 })
 
 # Test output arrays are not empty

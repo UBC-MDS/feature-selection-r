@@ -33,7 +33,7 @@ forward_select <- function(scorer, X, y, min_features=1, max_features=10) {
     stop("Expected a function for `scorer`." )
   }
 
-  # X and y must be a data.frame or something compatible
+  # X must be a data.frame or something compatible
   if (!any(class(X) == "data.frame")) {
     stop("Expected a 'data.frame' object for `data`.")
   }
@@ -42,6 +42,7 @@ forward_select <- function(scorer, X, y, min_features=1, max_features=10) {
     stop("X must be a 2-d array")
   }
 
+  # y must be a data.frame or something compatible
   if (!any(class(y) == "data.frame")) {
     stop("Expected a 'data.frame' object for `data`.")
   }
@@ -70,15 +71,15 @@ forward_select <- function(scorer, X, y, min_features=1, max_features=10) {
   ftr_no_selection <- c(1:length(X))
   ftr_selection <- c()
   ftr_running <- c()
-  scores_fn <- c()#Inf
+  scores_fn <- c()
   X_new <- c()
   best_scores_iter <- Inf
   best_scores_all <- c()
   flag_keep_running = TRUE
   flag_stop_running = FALSE
 
-  # The algorithm
-  repeat{ #for (j in 1:max_features){
+  # Body of the function
+  repeat{
 
     # get the scores for the features that haven't been added to the model
     for (i in ftr_no_selection){
