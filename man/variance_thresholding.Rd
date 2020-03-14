@@ -19,7 +19,7 @@ Find out about the variance of each feature and
 filter out the ones below a certain threshold
 }
 \examples{
-variance_thresholding(
-  data.frame(x1=c(1,2,3,4,5), x2=c(0,0,0,0,0), x3=c(1,1,1,1,1))
-)
+data <- data.frame(x1=c(1,2,3,4,5), x2=c(0,0,0,0,0), x3=c(1,1,1,1,1))
+variance_thresholding(data)
+# [1] 1
 }

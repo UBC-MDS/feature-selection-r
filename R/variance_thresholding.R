@@ -9,9 +9,9 @@
 #' @return vector. The indexes of selected features
 #' @export
 #' @examples
-#' variance_thresholding(
-#'   data.frame(x1=c(1,2,3,4,5), x2=c(0,0,0,0,0), x3=c(1,1,1,1,1))
-#' )
+#' data <- data.frame(x1=c(1,2,3,4,5), x2=c(0,0,0,0,0), x3=c(1,1,1,1,1))
+#' variance_thresholding(data)
+#' # [1] 1
 variance_thresholding <- function(data, threshold = 0) {
   if (!any(class(data) == "data.frame")) {
     stop("Expected a `data.frame` object for `data`.")
