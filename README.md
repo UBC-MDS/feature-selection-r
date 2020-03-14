@@ -24,7 +24,7 @@ we select them wisely). However, this is not a trivial task.
 
 The **featureselection** package for `R` can help you with this task. It
 is similar to its companion package [featureselection Package for
-Python](https://github.com/UBC-MDS/feature-selection-python).
+Python](https://devtools.r-lib.org).
 
 ## Features
 
@@ -179,13 +179,12 @@ featureselection::simulated_annealing(custom_scorer, X, y)
 
 ## Documentation
 
-The official documentation is hosted on Read the Docs:
-<https://feature-selection.readthedocs.io/en/latest/>
+The official documentation is hosted here:
+<https://ubc-mds.github.io/feature-selection-r>
 
 ## Credits
 
-This package was created with Cookiecutter and the
-UBC-MDS/cookiecutter-ubc-mds project template, modified from the
-[pyOpenSci/cookiecutter-pyopensci](https://github.com/pyOpenSci/cookiecutter-pyopensci)
-project template and the
-[audreyr/cookiecutter-pypackage](https://github.com/audreyr/cookiecutter-pypackage).
+This package was created with the assistance of the following packages:
+[devtools](https://devtools.r-lib.org),
+[usethis](https://github.com/r-lib/usethis),
+[pkgdown](https://pkgdown.r-lib.org)

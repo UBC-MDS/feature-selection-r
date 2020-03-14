@@ -26,7 +26,7 @@ Feature Selection with Machine Learning Models
 
 If you have encountered a dataset with a myriad number of features, it could be very difficult to work with them all. Some features may not even be important or relevant and could even cause optimization bias. One approach to this problem is to select a subset of these features for your model. Feature selection will reduce complexity, reduce the time when training an algorithm, and improve the accuracy of your model (if we select them wisely). However, this is not a trivial task.
 
-The  **featureselection** package for `R` can help you with this task. It is similar to its companion package [featureselection Package for Python](https://github.com/UBC-MDS/feature-selection-python).
+The  **featureselection** package for `R` can help you with this task. It is similar to its companion package [featureselection Package for Python][1].
 
 ## Features
 
@@ -145,7 +145,13 @@ featureselection::variance_threshold_select(data)
 ```
 
 ## Documentation
-The official documentation is hosted on Read the Docs: <https://feature-selection.readthedocs.io/en/latest/>
+
+The official documentation is hosted here: [https://ubc-mds.github.io/feature-selection-r](https://ubc-mds.github.io/feature-selection-r)
 
 ## Credits
-This package was created with Cookiecutter and the UBC-MDS/cookiecutter-ubc-mds project template, modified from the [pyOpenSci/cookiecutter-pyopensci](https://github.com/pyOpenSci/cookiecutter-pyopensci) project template and the [audreyr/cookiecutter-pypackage](https://github.com/audreyr/cookiecutter-pypackage).
+
+This package was created with the assistance of the following packages: [devtools][1], [usethis][2], [pkgdown][3]
+
+[1]: https://devtools.r-lib.org
+[2]: https://github.com/r-lib/usethis
+[3]: https://pkgdown.r-lib.org
