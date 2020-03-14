@@ -1,3 +1,7 @@
+<!-- badges: start -->
+[![R build status](https://github.com/UBC-MDS/feature-selection-r/workflows/R-CMD-check/badge.svg)](https://github.com/UBC-MDS/feature-selection-r/actions)
+<!-- badges: end -->
+
 # feature-selection-r
 Feature selection with machine learning models
 
