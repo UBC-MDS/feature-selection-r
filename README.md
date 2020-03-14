@@ -54,8 +54,8 @@ To guide you with an example of how to use this package, we would use the [Fried
 Load dataset:
 ```
 data <- dplyr::select(tgp::friedman.1.data(), -Ytrue)
-train <- data[1:(length(data)-1)]
-test <- data[length(data)]
+X <- data[1:(length(data)-1)]
+y <- data[length(data)]
 ```
 
 Use of feature selection functions:
