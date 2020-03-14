@@ -1,10 +1,10 @@
 Package: featureselection
 Title: Feature Selection
-Version: 0.0.0.9000
-Authors@R: c(person("Victor", "Cuspinera", role = c("aut"), email = "TBA"),
+Version: 1.0.0.0
+Authors@R: c(person("Victor", "Cuspinera", role = c("aut"), email = "vcuspinera@gmail.com"),
              person("Ryan", "Homer", role = c("aut", "cre"), email = "ryan.homer@alumni.ubc.ca"),
-             person("Jacky", "Ho", role = c("aut"), email = "TBA"),
-             person("Derek", "Kruszewski", role = c("aut"), email = "TBA"))
+             person("Jacky", "Ho", role = c("aut"), email = "jackyho112dev@gmail.com"),
+             person("Derek", "Kruszewski", role = c("aut"), email = "derek.j.kruszewski@gmail.com"))
 Description: Feature Selection with machine learning models.
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -19,7 +19,7 @@ Suggests:
 Imports:
     dplyr (>= 0.8.0),
     purrr (>= 0.3.0),
-    stats (>= 3.6.0)
+    stats
 URL: https://github.com/UBC-MDS/feature-selection-r
 BugReports: https://github.com/UBC-MDS/feature-selection-r/issues
 VignetteBuilder: knitr
