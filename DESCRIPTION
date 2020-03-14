@@ -19,7 +19,7 @@ Suggests:
 Imports:
     dplyr (>= 0.8.0),
     purrr (>= 0.3.0),
-    stats (>= 3.6.0)
+    stats
 URL: https://github.com/UBC-MDS/feature-selection-r
 BugReports: https://github.com/UBC-MDS/feature-selection-r/issues
 VignetteBuilder: knitr
