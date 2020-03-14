@@ -1,8 +1,9 @@
 #
-# Tests for variance_threshold_select()
+# Tests for variance_thresholding()
 #
 library(tibble)
 
+# Test for some general use cases
 testthat::test_that("relevant features remain", {
   data <- tibble(
     a = c(1,2,3),
@@ -11,7 +12,7 @@ testthat::test_that("relevant features remain", {
     d = c('123', '124', '1')
   )
 
-  feature_indexes <- variance_threshold_select(data)
+  feature_indexes <- variance_thresholding(data)
   testthat::expect_identical(feature_indexes, c(1, 4))
 })
 
@@ -23,7 +24,7 @@ testthat::test_that("appropriate features are dropped with higher threshold", {
     d = c('123', '14', '1')
   )
 
-  feature_indexes <- variance_threshold_select(data, threshold = 2)
+  feature_indexes <- variance_thresholding(data, threshold = 2)
   testthat::expect_identical(feature_indexes, c(4))
 })
 
@@ -34,15 +35,15 @@ testthat::test_that("inputs checking", {
   )
 
   testthat::expect_error(
-    variance_threshold_select(data, threshold=-1),
+    variance_thresholding(data, threshold=-1),
     "Threshold must be a positive number."
   )
   testthat::expect_error(
-    variance_threshold_select(data, threshold='123'),
+    variance_thresholding(data, threshold='123'),
     "Threshold must be a positive number."
   )
   testthat::expect_error(
-    variance_threshold_select(123),
+    variance_thresholding(123),
     "Expected a `data.frame` object for `data`."
   )
 })

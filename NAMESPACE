@@ -2,4 +2,4 @@
 
 export(forward_select)
 export(recursive_feature_elimination)
-export(variance_threshold_select)
+export(variance_thresholding)
