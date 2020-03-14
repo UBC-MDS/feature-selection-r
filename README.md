@@ -49,7 +49,65 @@ devtools::install_github("UBC-MDS/feature-selection-r")
 
 ## Usage
 
-- TODO
+To guide you with an example of how to use this package, we would use the [Friedman dataset](https://www.rdocumentation.org/packages/tgp/versions/2.4-14/topics/friedman.1.data).
+
+Load dataset:
+```
+data <- dplyr::select(tgp::friedman.1.data(), -Ytrue)
+train <- data[1:(length(data)-1)]
+test <- data[length(data)]
+```
+
+Use of feature selection functions:
+
+- forward_selection
+```
+# create a 'scorer'
+custom_scorer <- function(data){
+  model <- lm(Y ~ ., data)
+  return(mean(model$residuals^2))
+}
+
+# use function
+featureselection::forward_selection(custom_scorer, X, y, 3, 7)
+[1] 4 2 1 5
+```
+
+- recursive_feature_elimination
+```
+# create a 'scorer'
+custom_scorer <- function(data){
+  model <- lm(Y ~ ., data)
+  names(which.min(model$coefficients[-1]))[[1]]
+}
+
+# use function
+featureselection::recursive_feature_elimination(custom_scorer, data, 4)
+[1] "X1" "X2" "X4" "X5" "Y"
+```
+
+- simulated_annealing
+```
+# create a 'scorer'
+custom_scorer <- function(data){
+  model <- lm(Y ~ ., data)
+  return(mean(model$residuals^2))
+}
+
+# use function
+featureselection::simulated_annealing(custom_scorer, X, y)
+[1]  1  2  3  4  5  7  9 10
+```
+
+- variance_threshold_select  
+*note: for this function we would use different data.*
+```
+# use function
+featureselection::variance_threshold_select(
+  data.frame(x1=c(1,2,3,4,5), x2=c(0,0,0,0,0), x3=c(1,1,1,1,1))
+)
+[1] 1
+```
 
 ## Documentation
 The official documentation is hosted on Read the Docs: <https://feature-selection.readthedocs.io/en/latest/>
