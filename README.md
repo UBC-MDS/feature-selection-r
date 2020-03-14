@@ -1,6 +1,6 @@
 <!-- badges: start -->
 [![R build status](https://github.com/UBC-MDS/feature-selection-r/workflows/R-CMD-check/badge.svg)](https://github.com/UBC-MDS/feature-selection-r/actions)
-[![codecov](https://codecov.io/gh/UBC-MDS/feature-selection-r/branch/testcheck/graph/badge.svg)](https://codecov.io/gh/UBC-MDS/feature-selection-r)
+[![codecov](https://codecov.io/gh/UBC-MDS/feature-selection-r/branch/master/graph/badge.svg)](https://codecov.io/gh/UBC-MDS/feature-selection-r)
 <!-- badges: end -->
 
 # feature-selection-r
