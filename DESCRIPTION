@@ -10,16 +10,16 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.0.2
-Suggests: 
+Suggests:
     testthat (>= 2.1.0),
     tgp (>= 2.4.14),
     covr,
     knitr,
     rmarkdown
-Imports: 
-    dplyr,
-    purrr,
-    stats
+Imports:
+    dplyr (>= 0.8.0),
+    purrr (>= 0.3.0),
+    stats (>= 3.6.0)
 URL: https://github.com/UBC-MDS/feature-selection-r
 BugReports: https://github.com/UBC-MDS/feature-selection-r/issues
 VignetteBuilder: knitr

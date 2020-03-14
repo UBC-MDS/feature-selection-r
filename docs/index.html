@@ -46,18 +46,6 @@
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="articles/featureselection-vignette.html">featureselection-vignette</a>
-    </li>
-  </ul>
-</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
@@ -78,60 +66,57 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="feature-selection-r" class="section level1">
+<div id="featureselection-package-for-r" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#feature-selection-r" class="anchor"></a>feature-selection-r</h1></div>
-<p>Feature selection with machine learning models</p>
+<a href="#featureselection-package-for-r" class="anchor"></a>featureselection Package for R</h1></div>
+<p>Feature Selection with Machine Learning Models</p>
 <!-- badges: start -->
 
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview:</h2>
-<p>If you have encountered a database with a myriad number of features, which could be messy to work on, a good idea is to approach this problem by selecting only some of these features for your model. Feature selection will reduce complexity, reduce the time when training an algorithm, and improve the accuracy of your model (if we select them wisely). However, this is not a trivial task.</p>
-<p>To help you out performing this task, we have created the <strong>featureselection</strong> package in <code>R</code>.</p>
-<p>If you are interested in a similar feature selection package for <code>python</code>, click <a href="https://github.com/UBC-MDS/feature-selection-python">here</a>.</p>
+<p>If you have encountered a dataset with a myriad number of features, it could be very difficult to work with them all. Some features may not even be important or relevant and could even cause optimization bias. One approach to this problem is to select a subset of these features for your model. Feature selection will reduce complexity, reduce the time when training an algorithm, and improve the accuracy of your model (if we select them wisely). However, this is not a trivial task.</p>
+<p>The <strong>featureselection</strong> package for <code>R</code> can help you with this task. It is similar to its companion package <a href="https://github.com/UBC-MDS/feature-selection-python">featureselection Package for Python</a>.</p>
 </div>
-<div id="feature-description" class="section level2">
+<div id="features" class="section level2">
 <h2 class="hasAnchor">
-<a href="#feature-description" class="anchor"></a>Feature description:</h2>
-<p>In this package, four functions are included to lead with feature selection:</p>
-<div id="features" class="section level3">
-<h3 class="hasAnchor">
-<a href="#features" class="anchor"></a>Features</h3>
+<a href="#features" class="anchor"></a>Features</h2>
+<p>In this package, four functions are included for feature selection:</p>
 <ul>
-<li><p><code>forward_selection</code> - Function that use the forward selection algorithm to choose the number of features in a model. This iterative algorithm starts as an empty model, and add the variable with the highest improve in the accuracy of the model. The process then is iteratively repeated selecting the variables with the best improvement in the accuracy. This procedure stops when the remaining variables doesn’t enhance the accuracy of the model.</p></li>
-<li><p><code>recursive_feature_elimination</code> - Iteratively fit and score an estimator for greedy feature elimination.</p></li>
-<li><p><code>variance_threshold_select</code> - Perform simmulated annealing to select features: randomly choose a set of features and determine model performance. Then slightly modify the chosen features randomly and test to see if the modified feature list has improved model performance. If there is improvement, the newer model is kept, if not, a test is performed to determine if the worse model is still kept based on a acceptance probability that decreases as iterations continue and how worse the newer model performs. The process is repeated for a set number of iterations.</p></li>
+<li><p><code>forward_selection</code> - Function that use the forward selection algorithm to choose the number of features in a model. This iterative algorithm starts as an empty model, and add the feature with the best improvement based on the accuracy of the model. The process then is iteratively repeated selecting the features with the best improvement in accuracy. This procedure stops when the remaining features no longer enhance the accuracy of the model.</p></li>
+<li><p><code>recursive_feature_elimination</code> - Iteratively fit and score an estimator for greedy feature elimination. The model initially considers all features with the goal of discovering the worst performing feature which is then removed from the dataset. This process is repeated until the desired number of features are attained.</p></li>
+<li><p><code>variance_thresholding</code> - Perform simmulated annealing to select features: randomly choose a set of features and determine model performance. Then slightly modify the chosen features randomly and test to see if the modified feature list has improved model performance. If there is improvement, the newer model is kept, if not, a test is performed to determine if the worse model is still kept based on a acceptance probability that decreases as iterations continue and how worse the newer model performs. The process is repeated for a set number of iterations.</p></li>
 <li><p><code>simulated_annealing</code> - Perform simmulated annealing to select features: randomly choose a set of features and determine model performance. Then slightly modify the chosen features randomly and test to see if the modified feature list has improved model performance. If there is improvement, the newer model is kept, if not, a test is performed to determine if the worse model is still kept based on a acceptance probability that decreases as iterations continue and how worse the newer model performs. The process is repeated for a set number of iterations.</p></li>
 </ul>
 </div>
-<div id="existing-ecosystems" class="section level3">
-<h3 class="hasAnchor">
-<a href="#existing-ecosystems" class="anchor"></a>Existing Ecosystems:</h3>
-<p>Some of the above features already exsist within the R ecosystem:</p>
+<div id="existing-ecosystems" class="section level2">
+<h2 class="hasAnchor">
+<a href="#existing-ecosystems" class="anchor"></a>Existing Ecosystems:</h2>
+<p>Some of the above features already exsist within the R ecosystem but are provided for feature parity with <a href="https://github.com/UBC-MDS/feature-selection-python">Python edition</a> of this package.</p>
 <ul>
 <li><p><a href="https://www.rdocumentation.org/packages/MXM/versions/0.9.4/topics/Forward%20selection">Forward Selection</a></p></li>
 <li><p><a href="https://www.rdocumentation.org/packages/caret/versions/6.0-85/topics/rfe">Recursive Feature Elimination</a></p></li>
-<li><p>[Variance Threshold] = None</p></li>
-<li><p>[Simulated Annealing] = None</p></li>
+<li><p>Variance Threshold (None)</p></li>
+<li><p>Simulated Annealing (None)</p></li>
 </ul>
-</div>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation:</h2>
+<p>Make sure you have the <code>devtools</code> package installed. You can install it as follows.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#Install development version from Github</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># install.packages("devtools")</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>devtools<span class="op">::</span><span class="kw"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"UBC-MDS/feature-selection-r"</span>)</span></code></pre></div>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>)</span></code></pre></div>
+<p>Then, install the feature selection package.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>devtools<span class="op">::</span><span class="kw"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"UBC-MDS/feature-selection-r"</span>)</span></code></pre></div>
 </div>
 <div id="dependencies" class="section level2">
 <h2 class="hasAnchor">
 <a href="#dependencies" class="anchor"></a>Dependencies</h2>
 <ul>
 <li><a href="https://www.r-project.org/">R 3.6</a></li>
-<li><a href="https://dplyr.tidyverse.org/">dyplr 0.8.5</a></li>
-<li><a href="https://purrr.tidyverse.org/">purrr 0.3.3</a></li>
-<li><a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html">stats 4.0.0</a></li>
+<li><a href="https://dplyr.tidyverse.org/">dyplr 0.8.0</a></li>
+<li><a href="https://purrr.tidyverse.org/">purrr 0.3.0</a></li>
+<li><a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html">stats 3.6.0</a></li>
 </ul>
 </div>
 <div id="usage" class="section level2">
@@ -139,58 +124,63 @@
 <a href="#usage" class="anchor"></a>Usage</h2>
 <p>To guide you with an example of how to use this package, we will use the <a href="https://www.rdocumentation.org/packages/tgp/versions/2.4-14/topics/friedman.1.data">Friedman dataset</a>.</p>
 <p>Load dataset:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>data &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(tgp<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/tgp/man/friedman.1.data.html">friedman.1.data</a></span>(), <span class="op">-</span>Ytrue)</span>
-<span id="cb2-2"><a href="#cb2-2"></a>X &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(data, <span class="op">-</span>Y)</span>
-<span id="cb2-3"><a href="#cb2-3"></a>y &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(data, Y)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>data &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(tgp<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/tgp/man/friedman.1.data.html">friedman.1.data</a></span>(), <span class="op">-</span>Ytrue)</span>
+<span id="cb3-2"><a href="#cb3-2"></a>X &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(data, <span class="op">-</span>Y)</span>
+<span id="cb3-3"><a href="#cb3-3"></a>y &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(data, Y)</span></code></pre></div>
 <p>Use of feature selection functions:</p>
-<ul>
-<li>forward_selection</li>
-</ul>
-<!-- end list --><div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># create a 'scorer' that accepts X and y, and returns the error</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="co"># of the datasets.</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>custom_scorer &lt;-<span class="st"> </span><span class="cf">function</span>(data){</span>
-<span id="cb3-4"><a href="#cb3-4"></a>  model &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(Y <span class="op">~</span><span class="st"> </span>., data)</span>
-<span id="cb3-5"><a href="#cb3-5"></a>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(model<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>))</span>
-<span id="cb3-6"><a href="#cb3-6"></a>}</span>
-<span id="cb3-7"><a href="#cb3-7"></a></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="co"># use function</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a>featureselection<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/featureselection/man/forward_selection.html">forward_selection</a></span>(custom_scorer, X, y, <span class="dv">3</span>, <span class="dv">7</span>)</span>
-<span id="cb3-10"><a href="#cb3-10"></a>[<span class="dv">1</span>] <span class="dv">4</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">5</span></span></code></pre></div>
-<ul>
-<li>recursive_feature_elimination</li>
-</ul>
-<!-- end list --><div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># create a custom 'scorer' that returns the name of the column with</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co"># the lowest coefficient weight.</span></span>
+<div id="forward_selection" class="section level3">
+<h3 class="hasAnchor">
+<a href="#forward_selection" class="anchor"></a>forward_selection</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Create a 'scorer' that accepts a dataset</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co"># and returns the Mean Squared Error.</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a>custom_scorer &lt;-<span class="st"> </span><span class="cf">function</span>(data){</span>
 <span id="cb4-4"><a href="#cb4-4"></a>  model &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(Y <span class="op">~</span><span class="st"> </span>., data)</span>
-<span id="cb4-5"><a href="#cb4-5"></a>  <span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/which.min.html">which.min</a></span>(model<span class="op">$</span>coefficients[<span class="op">-</span><span class="dv">1</span>]))[[<span class="dv">1</span>]]</span>
+<span id="cb4-5"><a href="#cb4-5"></a>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(model<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>))</span>
 <span id="cb4-6"><a href="#cb4-6"></a>}</span>
 <span id="cb4-7"><a href="#cb4-7"></a></span>
 <span id="cb4-8"><a href="#cb4-8"></a><span class="co"># use function</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a>featureselection<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/featureselection/man/recursive_feature_elimination.html">recursive_feature_elimination</a></span>(custom_scorer, X, y, <span class="dv">4</span>)</span>
-<span id="cb4-10"><a href="#cb4-10"></a>[<span class="dv">1</span>] <span class="st">"X1"</span> <span class="st">"X2"</span> <span class="st">"X4"</span> <span class="st">"X5"</span> <span class="st">"Y"</span></span></code></pre></div>
-<ul>
-<li>simulated_annealing</li>
-</ul>
-<!-- end list --><div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># create a 'scorer' that accepts X and y, and returns the error</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="co"># of the datasets.</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>featureselection<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/featureselection/man/forward_selection.html">forward_selection</a></span>(custom_scorer, X, y, <span class="dv">3</span>, <span class="dv">7</span>)</span>
+<span id="cb4-10"><a href="#cb4-10"></a>[<span class="dv">1</span>] <span class="dv">4</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">5</span></span></code></pre></div>
+</div>
+<div id="recursive_feature_elimination" class="section level3">
+<h3 class="hasAnchor">
+<a href="#recursive_feature_elimination" class="anchor"></a>recursive_feature_elimination</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Create a custom 'scorer' that accepts a dataset and returns</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co"># the name of the column with the lowest coefficient weight.</span></span>
 <span id="cb5-3"><a href="#cb5-3"></a>custom_scorer &lt;-<span class="st"> </span><span class="cf">function</span>(data){</span>
 <span id="cb5-4"><a href="#cb5-4"></a>  model &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(Y <span class="op">~</span><span class="st"> </span>., data)</span>
-<span id="cb5-5"><a href="#cb5-5"></a>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(model<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>))</span>
+<span id="cb5-5"><a href="#cb5-5"></a>  <span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/which.min.html">which.min</a></span>(model<span class="op">$</span>coefficients[<span class="op">-</span><span class="dv">1</span>]))[[<span class="dv">1</span>]]</span>
 <span id="cb5-6"><a href="#cb5-6"></a>}</span>
 <span id="cb5-7"><a href="#cb5-7"></a></span>
 <span id="cb5-8"><a href="#cb5-8"></a><span class="co"># use function</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a>featureselection<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/featureselection/man/simulated_annealing.html">simulated_annealing</a></span>(custom_scorer, X, y)</span>
-<span id="cb5-10"><a href="#cb5-10"></a>[<span class="dv">1</span>]  <span class="dv">1</span>  <span class="dv">2</span>  <span class="dv">3</span>  <span class="dv">4</span>  <span class="dv">5</span>  <span class="dv">7</span>  <span class="dv">9</span> <span class="dv">10</span></span></code></pre></div>
-<ul>
-<li>variance_threshold_select<br><em>note: for this function we would use different data.</em>
-</li>
-</ul>
-<!-- end list --><div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># use function</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>featureselection<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/featureselection/man/variance_threshold_select.html">variance_threshold_select</a></span>(</span>
-<span id="cb6-3"><a href="#cb6-3"></a>  <span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x1=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>), <span class="dt">x2=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="dt">x3=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span>
-<span id="cb6-4"><a href="#cb6-4"></a>)</span>
-<span id="cb6-5"><a href="#cb6-5"></a>[<span class="dv">1</span>] <span class="dv">1</span></span></code></pre></div>
+<span id="cb5-9"><a href="#cb5-9"></a>featureselection<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/featureselection/man/recursive_feature_elimination.html">recursive_feature_elimination</a></span>(custom_scorer, X, y, <span class="dv">4</span>)</span>
+<span id="cb5-10"><a href="#cb5-10"></a>[<span class="dv">1</span>] <span class="st">"X1"</span> <span class="st">"X2"</span> <span class="st">"X4"</span> <span class="st">"X5"</span> <span class="st">"Y"</span></span></code></pre></div>
+</div>
+<div id="simulated_annealing" class="section level3">
+<h3 class="hasAnchor">
+<a href="#simulated_annealing" class="anchor"></a>simulated_annealing</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Create a 'scorer' that accepts a dataset</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co"># and returns the Mean Squared Error.</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>custom_scorer &lt;-<span class="st"> </span><span class="cf">function</span>(data){</span>
+<span id="cb6-4"><a href="#cb6-4"></a>  model &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(Y <span class="op">~</span><span class="st"> </span>., data)</span>
+<span id="cb6-5"><a href="#cb6-5"></a>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(model<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>))</span>
+<span id="cb6-6"><a href="#cb6-6"></a>}</span>
+<span id="cb6-7"><a href="#cb6-7"></a></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co"># use function</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a>featureselection<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/featureselection/man/simulated_annealing.html">simulated_annealing</a></span>(custom_scorer, X, y)</span>
+<span id="cb6-10"><a href="#cb6-10"></a>[<span class="dv">1</span>]  <span class="dv">1</span>  <span class="dv">2</span>  <span class="dv">3</span>  <span class="dv">4</span>  <span class="dv">5</span>  <span class="dv">7</span>  <span class="dv">9</span> <span class="dv">10</span></span></code></pre></div>
+</div>
+<div id="variance_threshold_select" class="section level3">
+<h3 class="hasAnchor">
+<a href="#variance_threshold_select" class="anchor"></a>variance_threshold_select</h3>
+<p><em>Note: This function does not use the Friedman dataset.</em></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># sample data to test variance</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>data &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x1=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>), <span class="dt">x2=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="dt">x3=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb7-3"><a href="#cb7-3"></a></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co"># use function</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>featureselection<span class="op">::</span><span class="kw">variance_threshold_select</span>(data)</span>
+<span id="cb7-6"><a href="#cb7-6"></a>[<span class="dv">1</span>] <span class="dv">1</span></span></code></pre></div>
+</div>
 </div>
 <div id="documentation" class="section level2">
 <h2 class="hasAnchor">
@@ -242,7 +232,7 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://github.com/UBC-MDS/feature-selection-r/actions"><img src="https://github.com/UBC-MDS/feature-selection-r/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://codecov.io/gh/UBC-MDS/feature-selection-r"><img src="https://codecov.io/gh/UBC-MDS/feature-selection-r/branch/testcheck/graph/badge.svg" alt="codecov"></a></li>
+<li><a href="https://codecov.io/gh/UBC-MDS/feature-selection-r"><img src="https://codecov.io/gh/UBC-MDS/feature-selection-r/branch/master/graph/badge.svg" alt="codecov"></a></li>
 </ul>
 </div>
 </div>
