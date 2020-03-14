@@ -2,7 +2,10 @@
 # Tests for variance_thresholding()
 #
 
-# Test for some general use cases
+#'
+#' Test for some general use cases with default thresholding
+#'
+#' @NoRd
 testthat::test_that("relevant features remain", {
   data <- dplyr::tibble(
     a = c(1,2,3),
@@ -15,6 +18,10 @@ testthat::test_that("relevant features remain", {
   testthat::expect_identical(feature_indexes, c(1, 4))
 })
 
+#'
+#' Make sure the thresholding apart from the default is working as intended
+#'
+#' @NoRd
 testthat::test_that("appropriate features are dropped with higher threshold", {
   data <- dplyr::tibble(
     a = c(1,2,3),
@@ -27,6 +34,11 @@ testthat::test_that("appropriate features are dropped with higher threshold", {
   testthat::expect_identical(feature_indexes, c(4))
 })
 
+#'
+#' Make sure the function blows up when invalid inputs are past in for
+#' both the threshold and X 
+#'
+#' @NoRd
 testthat::test_that("inputs checking", {
   data <- dplyr::tibble(
     a = c(1,2,3),

@@ -13,9 +13,13 @@ scorer <- function(data) {
    return(mean(model$residuals^2))
 }
 
-# This test creates a dataset that has 5 features that are are used to compute `Y`.
-# The remaining features are independent of `Y`.
-# This test should select the 5 feature columns used to compute `Y`.
+#'
+#' This test creates a dataset that has 5 features that
+#' are used to compute `Y`.
+#' The remaining features are independent of `Y`.
+#' This test should select the 5 feature columns used to compute `Y`.
+#'
+#' @NoRd
 testthat::test_that("relevant features remain", {
   # Create dataframe and remove Y true column; keep Y.
   set.seed(0)
@@ -29,6 +33,11 @@ testthat::test_that("relevant features remain", {
   testthat::expect_setequal(results, c(1, 2, 4, 5))
 })
 
+#'
+#' Make sure that the inputs are valid.
+#' Namely, X and Y need to be data frames and min feature number > 0.
+#'
+#' @NoRd
 testthat::test_that("X and y tests", {
   set.seed(0)
   data <- dplyr::select(tgp::friedman.1.data(), -Ytrue)
@@ -49,11 +58,14 @@ testthat::test_that("X and y tests", {
     testthat::expect_error(forward_selection(scorer, X, list()), "data.frame")
   })
 
-  # check that min number of features is greater or equal to one
+  # check that min number of features is greater than or equal to one
   testthat::expect_error(forward_selection(scorer, X, y, 0, 6))
 })
 
-# check that the number of features are between min and max number of features
+#'
+#' Check that the number of features are between min and max number of features
+#'
+#' @NoRd
 testthat::test_that("min_features and max_features works properly", {
   data <- dplyr::select(tgp::friedman.1.data(), -Ytrue)
   X <- data[1:(length(data)-1)]
@@ -63,7 +75,10 @@ testthat::test_that("min_features and max_features works properly", {
   testthat::expect_error(forward_selection(scorer, X, y, 6, 5))
 })
 
-# 'scorer' is a function
+#'
+#' Check that 'scorer' is a function
+#'
+#' @NoRd
 testthat::test_that("`scorer param is a function", {
   testthat::expect_error(forward_selection(0, X, y, 4, 4), "scorer")
 })
