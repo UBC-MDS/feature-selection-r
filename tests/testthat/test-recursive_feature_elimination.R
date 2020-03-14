@@ -8,14 +8,16 @@
 #' @param data A data.frame with features and response columns.
 #'
 #' @return The column name to be eliminated
+#' @NoRd
 scorer <- function(data) {
   model <- lm(Y ~ ., data)
   names(which.min(model$coefficients[-1]))[[1]]
 }
 
-# This test creates a dataset that has 5 features that are are used to compute `Y`.
-# The remaining features are independent of `Y`.
-# This test should select the 5 feature columns used to compute `Y`.
+#' This test creates a dataset that has 5 features that are are used to compute `Y`.
+#' The remaining features are independent of `Y`.
+#' This test should select the 5 feature columns used to compute `Y`.
+#' @NoRd
 testthat::test_that("relevant features remain", {
   # create dataframe and remove Ytrue column; keep Y.
   set.seed(0)
@@ -28,10 +30,11 @@ testthat::test_that("relevant features remain", {
   testthat::expect_identical(features, c("X1", "X2", "X4", "X5", "Y"))
 })
 
-# Test early stop logic and conversion from list of eliminated features
-# to list of features to keep.
-# NOTE: Number of features returned is always one more than specified
-# because it never eliminates target output column.
+#' Test early stop logic and conversion from list of eliminated features
+#' to list of features to keep.
+#' NOTE: Number of features returned is always one more than specified
+#' because it never eliminates target output column.
+#' @NoRd
 testthat::test_that("correct number of features are returned", {
   data <- dplyr::select(tgp::friedman.1.data(), -Ytrue)
   X <- dplyr::select(data, -Y)
@@ -41,16 +44,18 @@ testthat::test_that("correct number of features are returned", {
   testthat::expect_equal(length(recursive_feature_elimination(scorer, X, y, 9)), 10)
 })
 
-#
-# Test that the user-defined customer scorer is verified to be a function
-#
+#'
+#' Test that the user-defined customer scorer is verified to be a function
+#'
+#' @NoRd
 testthat::test_that("`scorer param is a function", {
   testthat::expect_error(recursive_feature_elimination(0, data.frame(), 1), "scorer")
 })
 
-#
-# Test that X is a data.frame
-#
+#'
+#' Test for error when X is a not a data.frame
+#'
+#' @NoRd
 testthat::test_that("data param X is a data.frame (or tibble)", {
   testthat::expect_error(recursive_feature_elimination(scorer, 0, data.frame(), 1), "data.frame")
   testthat::expect_error(recursive_feature_elimination(scorer, "nonsense", data.frame(), 1), "data.frame")
@@ -58,9 +63,10 @@ testthat::test_that("data param X is a data.frame (or tibble)", {
   testthat::expect_error(recursive_feature_elimination(scorer, list(), data.frame(), 1), "data.frame")
 })
 
-#
-# Test that y is a data.frame
-#
+#'
+#' Test for error when y is a not a data.frame
+#'
+#' @NoRd
 testthat::test_that("data param y is a data.frame (or tibble)", {
   testthat::expect_error(recursive_feature_elimination(scorer, data.frame(), 0, 1), "data.frame")
   testthat::expect_error(recursive_feature_elimination(scorer, data.frame(), "nonsense", 1), "data.frame")
@@ -68,9 +74,10 @@ testthat::test_that("data param y is a data.frame (or tibble)", {
   testthat::expect_error(recursive_feature_elimination(scorer, data.frame(), list(), 1), "data.frame")
 })
 
-#
-# Test that X and y are the same length
-#
+#'
+#' Test that X and y are the same length
+#'
+#' @NoRd
 testthat::test_that("X and y have the same number of examples ", {
   testthat::expect_error(recursive_feature_elimination(scorer,
                                                        X = data.frame(f1 = c(1, 2)),
@@ -79,9 +86,10 @@ testthat::test_that("X and y have the same number of examples ", {
                          regexp = "examples")
 })
 
-#
-# Test with dplyr::tibble
-#
+#'
+#' Test with dplyr::tibble
+#'
+#' @NoRd
 testthat::test_that("tibbles work too!", {
   data <- dplyr::select(tgp::friedman.1.data(), -Ytrue)
   X <- dplyr::as_tibble(dplyr::select(data, -Y))
@@ -89,9 +97,10 @@ testthat::test_that("tibbles work too!", {
   testthat::expect_equal(length(recursive_feature_elimination(scorer, X, y, 1)), 2)
 })
 
-#
-# Test n_features_to_select input
-#
+#'
+#' Test n_features_to_select input
+#'
+#' @NoRd
 testthat::test_that("n_features_to_select param is a number within valid range", {
   data <- dplyr::select(tgp::friedman.1.data(), -Ytrue)
   X <- dplyr::select(data, -Y)
