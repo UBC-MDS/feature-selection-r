@@ -1,5 +1,5 @@
 # feature-selection-r
-An R package for feature selection with ML estimators
+Feature selection with machine learning models
 
 ## Overview:
 If you have encountered a database with a myriad number of features, which could be messy to work on, a good idea is to approach this problem by selecting only some of these features for your model. Feature selection will reduce complexity, reduce the time when training an algorithm, and improve the accuracy of your model (if we select them wisely). However, this is not a trivial task. 
@@ -11,15 +11,15 @@ If you are interested in a similar feature selection package for `python`, click
 ## Feature description:
 In this package, four functions are included to lead with feature selection:
 
-### Functions
+### Features
 
-* `forward_select` - Function that use the forward algorithm to select the number of features in a model. This iterative algorithm starts as an empty model, and add the variable with the highest improve in the accuracy of the model. The process then is iteratively repeated selecting the variables with the best improvement in the accuracy. This procedure stops when the remaining variables doesn't enhance the accuracy of the model.  
+* `forward_selection` - Function that use the forward selection algorithm to choose the number of features in a model. This iterative algorithm starts as an empty model, and add the variable with the highest improve in the accuracy of the model. The process then is iteratively repeated selecting the variables with the best improvement in the accuracy. This procedure stops when the remaining variables doesn't enhance the accuracy of the model.  
 
 * `recursive_feature_elimination` - Iteratively fit and score an estimator for greedy feature elimination.
 
 * `variance_thresholding` - Perform simmulated annealing to select features: randomly choose a set of features and determine model performance. Then slightly modify the chosen features randomly and test to see if the modified feature list has improved model performance. If there is improvement, the newer model is kept, if not, a test is performed to determine if the worse model is still kept based on a acceptance probability that decreases as iterations continue and how worse the newer model performs. The process is repeated for a set number of iterations.
 
-* `simulated_annealing_select` - Perform simmulated annealing to select features: randomly choose a set of features and determine model performance. Then slightly modify the chosen features randomly and test to see if the modified feature list has improved model performance. If there is improvement, the newer model is kept, if not, a test is performed to determine if the worse model is still kept based on a acceptance probability that decreases as iterations continue and how worse the newer model performs. The process is repeated for a set number of iterations.
+* `simulated_annealing` - Perform simmulated annealing to select features: randomly choose a set of features and determine model performance. Then slightly modify the chosen features randomly and test to see if the modified feature list has improved model performance. If there is improvement, the newer model is kept, if not, a test is performed to determine if the worse model is still kept based on a acceptance probability that decreases as iterations continue and how worse the newer model performs. The process is repeated for a set number of iterations.
 
 ### Existing Ecosystems:
 Some of the above features already exsist within the R ecosystem:
@@ -34,18 +34,83 @@ Some of the above features already exsist within the R ecosystem:
 
 ## Installation:
 
-- TODO
-
-## Features
-- TODO
+``` r
+#Install development version from Github
+# install.packages("devtools")
+devtools::install_github("UBC-MDS/feature-selection-r")
+```
 
 ## Dependencies
 
-- TODO
+- [R 3.6](https://www.r-project.org/)
+- [dyplr 0.8.5](https://dplyr.tidyverse.org/)
+- [purrr 0.3.3](https://purrr.tidyverse.org/)
+- [stats 4.0.0](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html)
 
 ## Usage
 
-- TODO
+To guide you with an example of how to use this package, we will use the [Friedman dataset](https://www.rdocumentation.org/packages/tgp/versions/2.4-14/topics/friedman.1.data).
+
+Load dataset:
+```
+data <- dplyr::select(tgp::friedman.1.data(), -Ytrue)
+X <- dplyr::select(data, -Y)
+y <- dplyr::select(data, Y)
+```
+
+Use of feature selection functions:
+
+- forward_selection
+```
+# create a 'scorer' that accepts X and y, and returns the error
+# of the datasets.
+custom_scorer <- function(data){
+  model <- lm(Y ~ ., data)
+  return(mean(model$residuals^2))
+}
+
+# use function
+featureselection::forward_selection(custom_scorer, X, y, 3, 7)
+[1] 4 2 1 5
+```
+
+- recursive_feature_elimination
+```
+# create a custom 'scorer' that returns the name of the column with
+# the lowest coefficient weight.
+custom_scorer <- function(data){
+  model <- lm(Y ~ ., data)
+  names(which.min(model$coefficients[-1]))[[1]]
+}
+
+# use function
+featureselection::recursive_feature_elimination(custom_scorer, X, y, 4)
+[1] "X1" "X2" "X4" "X5" "Y"
+```
+
+- simulated_annealing
+```
+# create a 'scorer' that accepts X and y, and returns the error
+# of the datasets.
+custom_scorer <- function(data){
+  model <- lm(Y ~ ., data)
+  return(mean(model$residuals^2))
+}
+
+# use function
+featureselection::simulated_annealing(custom_scorer, X, y)
+[1]  1  2  3  4  5  7  9 10
+```
+
+- variance_threshold_select  
+*note: for this function we would use different data.*
+```
+# use function
+featureselection::variance_threshold_select(
+  data.frame(x1=c(1,2,3,4,5), x2=c(0,0,0,0,0), x3=c(1,1,1,1,1))
+)
+[1] 1
+```
 
 ## Documentation
 The official documentation is hosted on Read the Docs: <https://feature-selection.readthedocs.io/en/latest/>
