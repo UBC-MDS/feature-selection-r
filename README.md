@@ -46,7 +46,7 @@ selection:
   - `recursive_feature_elimination` - Iteratively fit and score an
     estimator for greedy feature elimination.
 
-  - `variance_threshold_select` - Perform simmulated annealing to select
+  - `variance_thresholding` - Perform simmulated annealing to select
     features: randomly choose a set of features and determine model
     performance. Then slightly modify the chosen features randomly and
     test to see if the modified feature list has improved model
