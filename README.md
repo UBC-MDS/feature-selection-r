@@ -166,7 +166,7 @@ featureselection::simulated_annealing(custom_scorer, X, y)
 [1]  1  2  3  4  5  7  9 10
 ```
 
-### variance\_threshold\_select
+### variance\_thresholding
 
 *Note: This function does not use the Friedman dataset.*
 
@@ -174,7 +174,7 @@ featureselection::simulated_annealing(custom_scorer, X, y)
     data <- data.frame(x1=c(1,2,3,4,5), x2=c(0,0,0,0,0), x3=c(1,1,1,1,1))
     
     # use function
-    featureselection::variance_threshold_select(data)
+    featureselection::variance_thresholding(data)
     [1] 1
 
 ## Documentation
