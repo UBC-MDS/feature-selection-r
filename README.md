@@ -49,13 +49,14 @@ devtools::install_github("UBC-MDS/feature-selection-r")
 
 ## Usage
 
-To guide you with an example of how to use this package, we would use the [Friedman dataset](https://www.rdocumentation.org/packages/tgp/versions/2.4-14/topics/friedman.1.data).
+To guide you with an example of how to use this package, we will use the [Friedman dataset](https://www.rdocumentation.org/packages/tgp/versions/2.4-14/topics/friedman.1.data).
+It is important to mention that the forward_selection, recursive_feature_elimination, and simulated_annealing functions need a custom scorer provided by the user, that returns the name of the column with the lowest coefficient weight.
 
 Load dataset:
 ```
 data <- dplyr::select(tgp::friedman.1.data(), -Ytrue)
-X <- data[1:(length(data)-1)]
-y <- data[length(data)]
+X <- dplyr::select(data, -Y)
+y <- dplyr::select(data, Y)
 ```
 
 Use of feature selection functions:
@@ -82,7 +83,7 @@ custom_scorer <- function(data){
 }
 
 # use function
-featureselection::recursive_feature_elimination(custom_scorer, data, 4)
+featureselection::recursive_feature_elimination(custom_scorer, X, y, 4)
 [1] "X1" "X2" "X4" "X5" "Y"
 ```
 
