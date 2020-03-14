@@ -24,7 +24,7 @@ variance_threshold_select <- function(data, threshold = 0) {
   selected_feature_indexes <- c()
   i <- 1
   for (name in names(data)) {
-    var_i <- var(data[,i])
+    var_i <- stats::var(data[,i])
 
     if (var_i > threshold) {
       selected_feature_indexes <- c(selected_feature_indexes, i)

@@ -8,7 +8,9 @@
 #'
 #' @param scorer A custom user-supplied function that accepts a data.frame
 #' as input and returns the column name of the column with the lowest weight.
-#' @param data A data.frame or tibble
+#' @param X A data.frame of shape (n_samples, n_features) with training samples.
+#' @param y A data.frame of shape (n_samples, n_outputs)
+#'          with true outputs used for training.
 #' @param n_features_to_select The target number of features.
 #'
 #' @return Vector of column names of non-eliminated features.
@@ -21,22 +23,36 @@
 #' }
 #' df <- tgp::friedman.1.data()
 #' data <- dplyr::select(df, -Ytrue)
-#' features <- featureselection::recursive_feature_elimination(custom_scorer_fn, data, 4)
+#' X <- dplyr::select(data, -Y)
+#' y <- dplyr::select(data, Y)
+#' features <- featureselection::recursive_feature_elimination(custom_scorer_fn, X, y, 4)
 #' # [1] "X1" "X2" "X4" "X5" "Y"
-
-recursive_feature_elimination <- function(scorer, data, n_features_to_select) {
+recursive_feature_elimination <- function(scorer, X, y, n_features_to_select) {
   # Is `scorer` a function?
   if (class(scorer) != "function") {
     stop("Expected a function for `scorer`." )
   }
 
-  # Do we have a data.frame or something compatible like tibble?
-  if (!any(class(data) == "data.frame")) {
-    stop("Expected a `data.frame` object for `data`.")
+  # Is X a data.frame or something compatible like tibble?
+  if (!any(class(X) == "data.frame")) {
+    stop("Expected a `data.frame` object for `X`.")
   }
 
+  # Is y a data.frame or something compatible like tibble?
+  if (!any(class(y) == "data.frame")) {
+    stop("Expected a `data.frame` object for `y`.")
+  }
+
+  # Do both X and y have the same number of examples?
+  if (nrow(X) != nrow(y)) {
+    stop("Expected both X and y to have the same number of examples")
+  }
+
+  # Join data frames into single data frame
+  data <- cbind(X, y)
+
   eliminated_features <- c()
-  total_features <- ncol(data) - 1
+  total_features <- ncol(X)
 
   # n_features_to_select must be a number
   if (!any(typeof(n_features_to_select) == c("integer", "double"))) {

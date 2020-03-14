@@ -4,13 +4,16 @@
 \alias{recursive_feature_elimination}
 \title{Select features by Recursive Feature Elimination}
 \usage{
-recursive_feature_elimination(scorer, data, n_features_to_select)
+recursive_feature_elimination(scorer, X, y, n_features_to_select)
 }
 \arguments{
 \item{scorer}{A custom user-supplied function that accepts a data.frame
 as input and returns the column name of the column with the lowest weight.}
 
-\item{data}{A data.frame or tibble}
+\item{X}{A data.frame of shape (n_samples, n_features) with training samples.}
+
+\item{y}{A data.frame of shape (n_samples, n_outputs)
+with true outputs used for training.}
 
 \item{n_features_to_select}{The target number of features.}
 }
@@ -30,6 +33,8 @@ custom_scorer_fn <- function(data) {
 }
 df <- tgp::friedman.1.data()
 data <- dplyr::select(df, -Ytrue)
-features <- featureselection::recursive_feature_elimination(custom_scorer_fn, data, 4)
+X <- dplyr::select(data, -Y)
+y <- dplyr::select(data, Y)
+features <- featureselection::recursive_feature_elimination(custom_scorer_fn, X, y, 4)
 # [1] "X1" "X2" "X4" "X5" "Y"
 }
