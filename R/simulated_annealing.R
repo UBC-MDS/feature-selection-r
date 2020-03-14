@@ -17,7 +17,17 @@
 #' @export
 #' 
 #' @examples
+#' custom_scorer_fn <- function(data) {
+#'  model <- lm(Y ~ ., data)
+#'  return(mean(model$residuals^2))
+#' }
+#' df <- tgp::friedman.1.data()
+#' data <- dplyr::select(df, -Ytrue)
+#' X <- data[1:(length(data)-1)]
+#' y <- data[length(data)]
+#' features <- featureselection::simulated_annealing(custom_scorer_fn, X, y)
 #' 
+
 simulated_annealing <- function(scorer, X, y, c = 1, iterations = 100, bools = FALSE) {
     
     # Is `scorer` a function?
@@ -37,7 +47,7 @@ simulated_annealing <- function(scorer, X, y, c = 1, iterations = 100, bools = F
     ftr_all <- c(1:length(X))
     ftr_old <- c()
     while (length(ftr_old) == 0){
-        ftr_old <- (rbinom(length(X), 1, 0.5) != 0)
+        ftr_old <- (stats::rbinom(length(X), 1, 0.5) != 0)
     }
     score_old <- scorer(cbind(X[ftr_old], y))
     
@@ -57,7 +67,7 @@ simulated_annealing <- function(scorer, X, y, c = 1, iterations = 100, bools = F
             } else {
                 # Determine probability of acceptance
                 p_accept <- exp((-i/c)*((score_new - score_old)/score_old))
-                if (runif(1) > p_accept){
+                if (stats::runif(1) > p_accept){
                 } else {
                     ftr_old <- ftr_new
                     score_old <- score_new
