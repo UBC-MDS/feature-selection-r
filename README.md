@@ -50,7 +50,6 @@ devtools::install_github("UBC-MDS/feature-selection-r")
 ## Usage
 
 To guide you with an example of how to use this package, we will use the [Friedman dataset](https://www.rdocumentation.org/packages/tgp/versions/2.4-14/topics/friedman.1.data).
-It is important to mention that the forward_selection, recursive_feature_elimination, and simulated_annealing functions need a custom scorer provided by the user, that returns the name of the column with the lowest coefficient weight.
 
 Load dataset:
 ```
@@ -63,7 +62,8 @@ Use of feature selection functions:
 
 - forward_selection
 ```
-# create a 'scorer'
+# create a 'scorer' that accepts X and y, and returns the error
+# of the datasets.
 custom_scorer <- function(data){
   model <- lm(Y ~ ., data)
   return(mean(model$residuals^2))
@@ -76,7 +76,8 @@ featureselection::forward_selection(custom_scorer, X, y, 3, 7)
 
 - recursive_feature_elimination
 ```
-# create a 'scorer'
+# create a custom 'scorer' that returns the name of the column with
+# the lowest coefficient weight.
 custom_scorer <- function(data){
   model <- lm(Y ~ ., data)
   names(which.min(model$coefficients[-1]))[[1]]
@@ -89,7 +90,8 @@ featureselection::recursive_feature_elimination(custom_scorer, X, y, 4)
 
 - simulated_annealing
 ```
-# create a 'scorer'
+# create a 'scorer' that accepts X and y, and returns the error
+# of the datasets.
 custom_scorer <- function(data){
   model <- lm(Y ~ ., data)
   return(mean(model$residuals^2))
