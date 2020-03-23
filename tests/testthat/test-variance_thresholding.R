@@ -15,7 +15,7 @@ testthat::test_that("relevant features remain", {
   )
 
   feature_indexes <- variance_thresholding(data)
-  testthat::expect_identical(feature_indexes, c(1, 4))
+  testthat::expect_equal(feature_indexes, c(1, 4))
 })
 
 #'
@@ -23,20 +23,28 @@ testthat::test_that("relevant features remain", {
 #'
 #' @NoRd
 testthat::test_that("appropriate features are dropped with higher threshold", {
-  data <- dplyr::tibble(
+  data_a <- dplyr::tibble(
     a = c(1,2,3),
     b = c(2,2,2),
     c = c('123', '123', '123'),
     d = c('123', '14', '1')
   )
 
-  feature_indexes <- variance_thresholding(data, threshold = 2)
-  testthat::expect_identical(feature_indexes, c(4))
+  feature_indexes_a <- variance_thresholding(data_a, threshold = 2)
+  testthat::expect_equal(feature_indexes_a, c(4))
+
+  data_b <- dplyr::tibble(
+    a = c(1,2,3),
+    b = c(2,2,2)
+  )
+
+  feature_indexes_b <- variance_thresholding(data_b, threshold = 100)
+  testthat::expect_equal(feature_indexes_b, NULL)
 })
 
 #'
 #' Make sure the function blows up when invalid inputs are past in for
-#' both the threshold and X 
+#' both the threshold and X
 #'
 #' @NoRd
 testthat::test_that("inputs checking", {
