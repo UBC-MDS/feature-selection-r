@@ -15,7 +15,7 @@ testthat::test_that("relevant features remain", {
   )
 
   feature_indexes <- variance_thresholding(data)
-  testthat::expect_identical(feature_indexes, c(1, 4))
+  testthat::expect_equal(feature_indexes, c(1, 4))
 })
 
 #'
@@ -31,12 +31,12 @@ testthat::test_that("appropriate features are dropped with higher threshold", {
   )
 
   feature_indexes <- variance_thresholding(data, threshold = 2)
-  testthat::expect_identical(feature_indexes, c(4))
+  testthat::expect_equal(feature_indexes, c(4))
 })
 
 #'
 #' Make sure the function blows up when invalid inputs are past in for
-#' both the threshold and X 
+#' both the threshold and X
 #'
 #' @NoRd
 testthat::test_that("inputs checking", {

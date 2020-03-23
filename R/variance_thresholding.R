@@ -27,7 +27,8 @@ variance_thresholding <- function(data, threshold = 0) {
     var_i <- stats::var(data[,i])
 
     if (var_i > threshold) {
-      # Add the column to the selected pile if variance's above the threshold
+      # Add the column to the selected pile if
+      # its variance is above the threshold
       selected_feature_indexes <- c(selected_feature_indexes, i)
     }
   }
