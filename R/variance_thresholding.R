@@ -6,7 +6,7 @@
 #' @param data tibble. The features to select from
 #' @param threshold double. The variance threshold
 #'
-#' @return vector. The indexes of selected features
+#' @return double vector. The indexes of selected features
 #' @export
 #' @examples
 #' data <- data.frame(x1=c(1,2,3,4,5), x2=c(0,0,0,0,0), x3=c(1,1,1,1,1))
@@ -22,15 +22,14 @@ variance_thresholding <- function(data, threshold = 0) {
   }
 
   selected_feature_indexes <- c()
-  i <- 1
-  for (name in names(data)) {
+  for (i in 1:length(names(data))) {
+    # Get variance of a column
     var_i <- stats::var(data[,i])
 
     if (var_i > threshold) {
+      # Add the column to the selected pile if variance's above the threshold
       selected_feature_indexes <- c(selected_feature_indexes, i)
     }
-
-    i <- i + 1
   }
 
   selected_feature_indexes
