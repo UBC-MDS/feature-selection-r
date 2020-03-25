@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# featureselection Package for R
+# featureselection package for R
 
 Feature Selection with Machine Learning Models
 
@@ -12,7 +12,7 @@ status](https://github.com/UBC-MDS/feature-selection-r/workflows/R-CMD-check/bad
 [![codecov](https://codecov.io/gh/UBC-MDS/feature-selection-r/branch/master/graph/badge.svg)](https://codecov.io/gh/UBC-MDS/feature-selection-r)
 <!-- badges: end -->
 
-## Overview:
+## Overview
 
 If you have encountered a dataset with a myriad number of features, it
 could be very difficult to work with them all. Some features may not
@@ -30,42 +30,38 @@ Python](https://devtools.r-lib.org).
 
 In this package, four functions are included for feature selection:
 
-  - `forward_selection` - Function that use the forward selection
-    algorithm to choose the number of features in a model. This
-    iterative algorithm starts as an empty model, and add the feature
-    with the best improvement based on the accuracy of the model. The
-    process then is iteratively repeated selecting the features with the
-    best improvement in accuracy. This procedure stops when the
-    remaining features no longer enhance the accuracy of the model.
+  - `forward_selection` - Forward Selection for greedy feature
+    selection. This iterative algorithm starts by considering each
+    feature separately to determine the one that results in the model
+    with best accuracy. The process is then repeated iteratively, adding
+    another feature one at a time, again selecting the single feature
+    that gives the best improvement in accuracy. This procedure stops
+    when it is not longer possible to improve the model.
 
-  - `recursive_feature_elimination` - Iteratively fit and score an
-    estimator for greedy feature elimination. The model initially
-    considers all features with the goal of discovering the worst
-    performing feature which is then removed from the dataset. This
-    process is repeated until the desired number of features are
-    attained.
-
-  - `variance_thresholding` - Perform simmulated annealing to select
-    features: randomly choose a set of features and determine model
-    performance. Then slightly modify the chosen features randomly and
-    test to see if the modified feature list has improved model
-    performance. If there is improvement, the newer model is kept, if
-    not, a test is performed to determine if the worse model is still
-    kept based on a acceptance probability that decreases as iterations
-    continue and how worse the newer model performs. The process is
-    repeated for a set number of iterations.
+  - `recursive_feature_elimination` - Recursive Feature Elimination
+    (RFE) for greedy feature selection. The model initially considers
+    all features with the goal of discovering the worst performing
+    feature which is then removed from the dataset. This process is
+    repeated until the desired number of features are attained.
 
   - `simulated_annealing` - Perform simmulated annealing to select
-    features: randomly choose a set of features and determine model
-    performance. Then slightly modify the chosen features randomly and
-    test to see if the modified feature list has improved model
-    performance. If there is improvement, the newer model is kept, if
-    not, a test is performed to determine if the worse model is still
-    kept based on a acceptance probability that decreases as iterations
-    continue and how worse the newer model performs. The process is
-    repeated for a set number of iterations.
+    features by randomly choosing a set of features and determining
+    model performance, then slightly modifying the chosen features
+    randomly and testing to see if the modified feature list has
+    improved model performance. If there is improvement, the newer model
+    is kept, if not, a test is performed to determine if the worse model
+    is still kept based on an acceptance probability that decreases as
+    iterations continue and how worse the newer model performs. The
+    process is repeated for a set number of iterations.
 
-## Existing Ecosystems:
+  - `variance_thresholding` - Select features based on their variances.
+    A threshold, typically a low one, would be set so that any feature
+    with a variance lower than that would be filtered out. Since this
+    algorithm only looks at features without their outputs, it could be
+    used to do feature selection on data related to unsupervised
+    learning.
+
+## Existing Ecosystems
 
 Some of the above features already exsist within the R ecosystem but are
 provided for feature parity with [Python
@@ -82,7 +78,7 @@ package.
 
   - Simulated Annealing (None)
 
-## Installation:
+## Installation
 
 Make sure you have the `devtools` package installed. You can install it
 as follows.
@@ -92,7 +88,8 @@ as follows.
 install.packages("devtools")
 ```
 
-Then, install the feature selection package.
+Then, install the feature selection
+    package.
 
 ``` r
 devtools::install_github("UBC-MDS/feature-selection-r")
@@ -107,11 +104,20 @@ devtools::install_github("UBC-MDS/feature-selection-r")
 
 ## Usage
 
-To guide you with an example of how to use this package, we will use the
-[Friedman
-dataset](https://www.rdocumentation.org/packages/tgp/versions/2.4-14/topics/friedman.1.data).
+The [Friedman
+dataset](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_friedman1.html)
+is used to generate data for some of the examples. The datasets contain
+some features that are generated by a whitenoise process and are
+expected to be eliminated during feature selection.
 
-Load dataset:
+**NOTE:** To run the examples below, you will need the `tgp` package. It
+can be installed from the R console with:
+
+``` r
+install.packages("tgp")
+```
+
+### Load Dataset
 
 ``` r
 data <- dplyr::select(tgp::friedman.1.data(), -Ytrue)
@@ -119,63 +125,67 @@ X <- dplyr::select(data, -Y)
 y <- dplyr::select(data, Y)
 ```
 
-Use of feature selection functions:
-
-### forward\_selection
+#### `forward_selection`
 
 ``` r
+#
 # Create a 'scorer' that accepts a dataset
 # and returns the Mean Squared Error.
+#
 custom_scorer <- function(data){
   model <- lm(Y ~ ., data)
   return(mean(model$residuals^2))
 }
 
-# use function
 featureselection::forward_selection(custom_scorer, X, y, 3, 7)
-[1] 4 2 1 5
+#> [1] 4 1 2 5
 ```
 
-### recursive\_feature\_elimination
+#### `recursive_feature_elimination`
 
 ``` r
+#
 # Create a custom 'scorer' that accepts a dataset and returns
 # the name of the column with the lowest coefficient weight.
+#
 custom_scorer <- function(data){
   model <- lm(Y ~ ., data)
   names(which.min(model$coefficients[-1]))[[1]]
 }
 
-# use function
 featureselection::recursive_feature_elimination(custom_scorer, X, y, 4)
-[1] "X1" "X2" "X4" "X5" "Y"
+#> [1] "X1" "X2" "X4" "X5" "Y"
 ```
 
-### simulated\_annealing
+#### `simulated_annealing`
 
 ``` r
+#
 # Create a 'scorer' that accepts a dataset
 # and returns the Mean Squared Error.
+#
 custom_scorer <- function(data){
   model <- lm(Y ~ ., data)
   return(mean(model$residuals^2))
 }
 
-# use function
 featureselection::simulated_annealing(custom_scorer, X, y)
-[1]  1  2  3  4  5  7  9 10
+#> [1]  1  2  3  4  5  7  9 10
 ```
 
-### variance\_thresholding
+#### `variance_thresholding`
 
-*Note: This function does not use the Friedman dataset.*
+``` r
+#
+# sample data to test variance
+#
+data <- data.frame(x1=c(1, 2, 3, 4, 5),
+                   x2=c(0, 0, 0, 0, 0),
+                   x3=c(1, 1, 1, 1, 1))
 
-    # sample data to test variance
-    data <- data.frame(x1=c(1,2,3,4,5), x2=c(0,0,0,0,0), x3=c(1,1,1,1,1))
-    
-    # use function
-    featureselection::variance_thresholding(data)
-    [1] 1
+featureselection::variance_thresholding(data)
+#> [1] 1
+```
 
 ## Documentation
 
