@@ -68,7 +68,7 @@ forward_selection <- function(scorer, X, y, min_features=1, max_features=10) {
 
   # min_features should be no greater than number of features of X.
   if (min_features > length(X)){
-    stop("min_features should be smaller or equal to number of X's features.")
+    stop("min_features should be less than or equal to number of features in X.")
   }
 
   # Initialize parameters
