@@ -10,9 +10,9 @@ forward_selection(scorer, X, y, min_features = 1, max_features = 10)
 \item{scorer}{A custom user-supplied function that accepts X and y
 (as defined below) as input and returns the error of the datasets.}
 
-\item{X}{tibble. training dataset}
+\item{X}{tibble. explanatory variables}
 
-\item{y}{tibble. test dataset}
+\item{y}{tibble. target}
 
 \item{min_features}{double. number of minimum features to select}
 

@@ -8,8 +8,8 @@
 #'
 #' @param scorer  A custom user-supplied function that accepts X and y
 #'   (as defined below) as input and returns the error of the datasets.
-#' @param X tibble. training dataset
-#' @param y tibble. test dataset
+#' @param X tibble. explanatory variables
+#' @param y tibble. target
 #' @param min_features double. number of minimum features to select
 #' @param max_features double. number of maximum features to select
 #'
@@ -38,7 +38,7 @@ forward_selection <- function(scorer, X, y, min_features=1, max_features=10) {
     stop("Expected a 'data.frame' object for `data`.")
   }
 
-  if (sum(!(dim(X))==1) != 2){
+  if (length(dim(X)) != 2){
     stop("X must be a 2-d array")
   }
 
@@ -47,7 +47,7 @@ forward_selection <- function(scorer, X, y, min_features=1, max_features=10) {
     stop("Expected a 'data.frame' object for `data`.")
   }
 
-  if (sum(!(dim(y))==1) != 1){
+  if (length(dim(y)) != 1){
     stop("y must be a 1-d array")
   }
 
@@ -75,8 +75,8 @@ forward_selection <- function(scorer, X, y, min_features=1, max_features=10) {
   X_new <- c()
   best_scores_iter <- Inf
   best_scores_all <- c()
-  flag_keep_running = TRUE
-  flag_stop_running = FALSE
+  flag_keep_running <- TRUE
+  flag_stop_running <- FALSE
 
   # Body of the function
   repeat{
