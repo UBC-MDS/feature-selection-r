@@ -12,7 +12,7 @@ variance_thresholding(data, threshold = 0)
 \item{threshold}{double. The variance threshold}
 }
 \value{
-vector. The indexes of selected features
+double vector. The indexes of selected features
 }
 \description{
 Find out about the variance of each feature and

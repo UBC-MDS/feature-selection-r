@@ -4,7 +4,15 @@
 \alias{simulated_annealing}
 \title{Feature selector that performs simmulated annealing to select features.}
 \usage{
-simulated_annealing(scorer, X, y, c = 1, iterations = 100, bools = FALSE)
+simulated_annealing(
+  scorer,
+  X,
+  y,
+  c = 1,
+  iterations = 100,
+  bools = FALSE,
+  random_state = NULL
+)
 }
 \arguments{
 \item{scorer}{A custom user-supplied function that accepts X and y (as defined below) as input and returns the error of the datasets.}
@@ -18,6 +26,8 @@ simulated_annealing(scorer, X, y, c = 1, iterations = 100, bools = FALSE)
 \item{iterations}{number of iterations}
 
 \item{bools}{If true function returns array of boolean values instead of column indicies}
+
+\item{random_state}{Seed for random number generators}
 }
 \value{
 array of selected features
