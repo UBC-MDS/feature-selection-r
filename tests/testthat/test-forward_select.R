@@ -86,7 +86,6 @@ testthat::test_that("min_features and max_features works properly", {
   testthat::expect_gte(length(forward_selection(scorer, X, y, 5, 6)), 4)
   testthat::expect_lte(length(forward_selection(scorer, X, y, 5, 6)), 6)
   testthat::expect_error(forward_selection(scorer, X, y, 6, 5))
-  testthat::expect_error(forward_selection(scorer, X, y, 0, 2)) #<<<<
 })
 
 #'
