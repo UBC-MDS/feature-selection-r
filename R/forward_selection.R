@@ -115,7 +115,7 @@ forward_selection <- function(scorer, X, y, min_features=1, max_features=10) {
       break
     }
 
-    # # break if in reaches the max_features
+    # break if `max_features` have been reached
     if (length(ftr_selection) >= max_features){
       break
     }
