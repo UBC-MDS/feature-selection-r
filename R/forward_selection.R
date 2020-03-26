@@ -109,7 +109,7 @@ forward_selection <- function(scorer, X, y, min_features=1, max_features=10) {
       flag_keep_running = FALSE
     }
 
-    # break if the the algorithm get more than min_features and
+    # break if `min_features` have been reached
     # additional features doesn't improve the result
     if (flag_keep_running == FALSE & flag_stop_running == TRUE){
       break
