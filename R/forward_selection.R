@@ -8,8 +8,8 @@
 #'
 #' @param scorer  A custom user-supplied function that accepts X and y
 #'   (as defined below) as input and returns the error of the datasets.
-#' @param X tibble. training dataset
-#' @param y tibble. test dataset
+#' @param X data frame of training features
+#' @param y data frame of training targets
 #' @param min_features double. number of minimum features to select
 #' @param max_features double. number of maximum features to select
 #'
@@ -66,6 +66,11 @@ forward_selection <- function(scorer, X, y, min_features=1, max_features=10) {
     stop("min_features should be more than zero.")
   }
 
+  # min_features should be no greater than number of features of X.
+  if (min_features > length(X)){
+    stop("min_features should be less than or equal to number of features in X.")
+  }
+
   # Initialize parameters
   # Obtain initial array of randomly selected features
   ftr_no_selection <- c(1:length(X))
@@ -75,8 +80,8 @@ forward_selection <- function(scorer, X, y, min_features=1, max_features=10) {
   X_new <- c()
   best_scores_iter <- Inf
   best_scores_all <- c()
-  flag_keep_running = TRUE
-  flag_stop_running = FALSE
+  flag_keep_running <- TRUE
+  flag_stop_running <- FALSE
 
   # Body of the function
   repeat{
@@ -104,13 +109,13 @@ forward_selection <- function(scorer, X, y, min_features=1, max_features=10) {
       flag_keep_running = FALSE
     }
 
-    # break if the the algorithm got more than min_features and
+    # break if `min_features` have been reached
     # additional features doesn't improve the result
     if (flag_keep_running == FALSE & flag_stop_running == TRUE){
       break
     }
 
-    # break if in reaches the max_features
+    # break if `max_features` have been reached
     if (length(ftr_selection) >= max_features){
       break
     }
