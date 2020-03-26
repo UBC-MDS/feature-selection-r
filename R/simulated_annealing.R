@@ -12,6 +12,7 @@
 #' @param c control rate of feature perturbation
 #' @param iterations number of iterations
 #' @param bools If true function returns array of boolean values instead of column indicies
+#' @param random_state Seed for random number generators
 #' 
 #' @return array of selected features
 #' @export
@@ -28,7 +29,7 @@
 #' features <- featureselection::simulated_annealing(custom_scorer_fn, X, y)
 #' 
 
-simulated_annealing <- function(scorer, X, y, c = 1, iterations = 100, bools = FALSE) {
+simulated_annealing <- function(scorer, X, y, c = 1, iterations = 100, bools = FALSE, random_state=NULL) {
     
     # Is `scorer` a function?
     if (class(scorer) != "function") {
@@ -42,6 +43,9 @@ simulated_annealing <- function(scorer, X, y, c = 1, iterations = 100, bools = F
 
     # Set mutate percentage
     mutate <- 0.05
+
+    # Set random state
+    set.seed(random_state)
     
     # Obtain initial array of randomly selected features
     ftr_all <- c(1:length(X))
