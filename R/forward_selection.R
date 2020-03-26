@@ -8,8 +8,8 @@
 #'
 #' @param scorer  A custom user-supplied function that accepts X and y
 #'   (as defined below) as input and returns the error of the datasets.
-#' @param X tibble. explanatory variables
-#' @param y tibble. target
+#' @param X data frame of training features
+#' @param y data frame of training targets
 #' @param min_features double. number of minimum features to select
 #' @param max_features double. number of maximum features to select
 #'
