@@ -60,6 +60,10 @@ testthat::test_that("X and y tests", {
 
   # check that min number of features is greater than or equal to one
   testthat::expect_error(forward_selection(scorer, X, y, 0, 6))
+
+
+  # check min_features smaller or equal to number or features of X.
+  testthat::expect_error(forward_selection(scorer, X, y, 20, 21))
 })
 
 #'

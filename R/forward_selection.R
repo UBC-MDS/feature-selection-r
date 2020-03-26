@@ -47,7 +47,7 @@ forward_selection <- function(scorer, X, y, min_features=1, max_features=10) {
     stop("Expected a 'data.frame' object for `data`.")
   }
 
-  if (length(dim(y)) != 1){
+  if (sum(!(dim(y))==1) != 1){
     stop("y must be a 1-d array")
   }
 
@@ -66,7 +66,7 @@ forward_selection <- function(scorer, X, y, min_features=1, max_features=10) {
     stop("min_features should be more than zero.")
   }
 
-  # min_features should be no greater than number of features
+  # min_features should be no greater than number of features of X.
   if (min_features > length(X)){
     stop("min_features should be smaller or equal to number of X's features.")
   }
