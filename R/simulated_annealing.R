@@ -80,6 +80,9 @@ simulated_annealing <- function(scorer, X, y, c = 1, iterations = 100, bools = F
         }
     }
     
+    # Reset random state
+    set.seed(NULL)
+
     # Return either feature indicies or booleans
     if (bools){
         return(ftr_old)
