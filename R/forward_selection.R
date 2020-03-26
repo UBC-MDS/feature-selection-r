@@ -66,6 +66,11 @@ forward_selection <- function(scorer, X, y, min_features=1, max_features=10) {
     stop("min_features should be more than zero.")
   }
 
+  # min_features should be no greater than number of features
+  if (min_features > length(X)){
+    stop("min_features should be smaller or equal to number of X's features.")
+  }
+
   # Initialize parameters
   # Obtain initial array of randomly selected features
   ftr_no_selection <- c(1:length(X))
