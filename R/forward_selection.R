@@ -38,7 +38,7 @@ forward_selection <- function(scorer, X, y, min_features=1, max_features=10) {
     stop("Expected a 'data.frame' object for `data`.")
   }
 
-  if (length(dim(X)) != 2){
+  if (sum(!(dim(X))==1) != 2){
     stop("X must be a 2-d array")
   }
 
@@ -109,13 +109,13 @@ forward_selection <- function(scorer, X, y, min_features=1, max_features=10) {
       flag_keep_running = FALSE
     }
 
-    # break if the the algorithm got more than min_features and
+    # break if the the algorithm get more than min_features and
     # additional features doesn't improve the result
     if (flag_keep_running == FALSE & flag_stop_running == TRUE){
       break
     }
 
-    # break if in reaches the max_features
+    # # break if in reaches the max_features
     if (length(ftr_selection) >= max_features){
       break
     }

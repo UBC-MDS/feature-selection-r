@@ -58,12 +58,21 @@ testthat::test_that("X and y tests", {
     testthat::expect_error(forward_selection(scorer, X, list()), "data.frame")
   })
 
+  array_3d <- data.frame(array(rnorm(100), c(100)))
+  # X is a 1-d array
+  testthat::expect_error(forward_selection(scorer, array_3d, y), "X must be a 2-d array")
+
+  # y is a 1-d array
+  testthat::expect_error(forward_selection(scorer, X, X), "y must be a 1-d array")
+
   # check that min number of features is greater than or equal to one
   testthat::expect_error(forward_selection(scorer, X, y, 0, 6))
 
-
   # check min_features smaller or equal to number or features of X.
   testthat::expect_error(forward_selection(scorer, X, y, 20, 21))
+
+  # check X and y have the same number of samples
+  testthat::expect_error(forward_selection(scorer, X, data.frame(y$Y[1:10])))
 })
 
 #'
@@ -77,6 +86,7 @@ testthat::test_that("min_features and max_features works properly", {
   testthat::expect_gte(length(forward_selection(scorer, X, y, 5, 6)), 4)
   testthat::expect_lte(length(forward_selection(scorer, X, y, 5, 6)), 6)
   testthat::expect_error(forward_selection(scorer, X, y, 6, 5))
+  testthat::expect_error(forward_selection(scorer, X, y, 0, 2)) #<<<<
 })
 
 #'
@@ -85,4 +95,5 @@ testthat::test_that("min_features and max_features works properly", {
 #' @NoRd
 testthat::test_that("`scorer param is a function", {
   testthat::expect_error(forward_selection(0, X, y, 4, 4), "scorer")
+  testthat::expect_error(forward_selection("a", X, y, 4, 4), "scorer")
 })
