@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-<img src="img/logo1.png" width="150" align = "right">
+<img src="img/logo3.png" width="150" align = "right">
 
 # featureselection package for R
 
