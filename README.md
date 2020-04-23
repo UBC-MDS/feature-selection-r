@@ -1,6 +1,8 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+<img src="img/logo3.png" width="150" align = "right">
+
 # featureselection package for R
 
 Feature Selection with Machine Learning Models
